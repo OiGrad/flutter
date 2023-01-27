@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kemet/core/navigation.dart';
 import 'package:kemet/helper/constants.dart';
+import 'package:kemet/modules/OTP/otp_screen.dart';
 import 'package:meta/meta.dart';
 
 part 'sign_in_and_sign_up_state.dart';
@@ -25,6 +27,10 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
    toggleToSignUp(){
     // loginSelected = false;
     emit(ToggleToSignupSuccess());
+  }
+
+  testGoToOTP(context){
+     navigateTo(context,const OTPScreen());
   }
 
 

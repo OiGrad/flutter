@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kemet/core/colors.dart';
 
-Widget defaultTextFormField(
-    {initValue,
-    required validator,
-    function,
-    required controller,
-    required label,
-     hintText,}) {
+Widget defaultTextFormField({
+  initValue,
+  required validator,
+  function,
+  required controller,
+  required label,
+  hintText,
+}) {
   return Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(
@@ -20,17 +21,17 @@ Widget defaultTextFormField(
     child: TextFormField(
       initialValue: initValue,
       validator: validator,
-      onFieldSubmitted: (value) {
-
-      },
+      onFieldSubmitted: (value) {},
       controller: controller,
       decoration: InputDecoration(
         border: InputBorder.none,
         label: Row(
           children: [
-            const SizedBox(width: 10,),
+            const SizedBox(
+              width: 10,
+            ),
             Text(
-                label,
+              label,
               style: TextStyle(color: AppColors.black),
             ),
           ],
@@ -42,36 +43,55 @@ Widget defaultTextFormField(
 }
 
 Widget defaultButton({
+  Widget? img,
   double r = 10.0,
   required String text,
-  required Color color ,
-   Color txtColor = Colors.white ,
+  required Color color,
+  Color txtColor = Colors.white,
   required function,
   required context,
 }) =>
     Container(
-      width: MediaQuery.of(context).size.width*0.80,
+      width: MediaQuery.of(context).size.width * 0.80,
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(
-          r,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            spreadRadius: 3,
-            blurRadius: 5,
-            offset:const Offset(0, 4), // changes position of shadow
+          color: color,
+          borderRadius: BorderRadius.circular(
+            r,
           ),
-        ]
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 2,
+              offset: const Offset(0, 2), // changes position of shadow
+            ),
+          ]
       ),
       child: TextButton(
         onPressed: function,
-        child: Text(
-          text,
-          style:  TextStyle(
-            color: txtColor,
-          ),
-        ),
+        child: img == null
+            ? Text(
+                text,
+                style: TextStyle(
+                  color: txtColor,
+                ),
+              )
+            : Row(
+                children: [
+                  const SizedBox(
+                    width: 60,
+                  ),
+                  img,
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    text,
+                    style: TextStyle(
+                      color: txtColor,
+                    ),
+                  )
+                ],
+              ),
       ),
     );

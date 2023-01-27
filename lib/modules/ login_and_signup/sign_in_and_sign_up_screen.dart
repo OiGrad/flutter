@@ -45,16 +45,22 @@ class _SignPageState extends State<SignPage> {
                     children: [
                       Image.asset('assets/images/kemet.png'),
                       SizedBox(
-                          height: MediaQuery.of(context).size.height * 1 / 20,
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 1 / 20,
                       ),
                       loginSelected
 
-                          ?//start part one
+                          ? //start part one
                       Container(
-                        height: MediaQuery.of(context).size.height * 1 / 12,
-                        decoration:  BoxDecoration(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 1 / 12,
+                        decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius:const BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(23),
                             topRight: Radius.circular(23),
                             bottomRight: Radius.circular(23),
@@ -64,21 +70,30 @@ class _SignPageState extends State<SignPage> {
                             color: Colors.black.withOpacity(0.5),
                             spreadRadius: 3,
                             blurRadius: 5,
-                            offset:const Offset(0, 4), // changes position of shadow
-                          ),],
+                            offset: const Offset(
+                                0, 4), // changes position of shadow
+                          ),
+                          ],
                         ),
-                        width: MediaQuery.of(context).size.width * 0.90,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 0.90,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             selectedLoginButton(context),
                             Expanded(
                               child: SizedBox(
-                                height: MediaQuery.of(context).size.height * 1 / 12,
+                                height: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height * 1 / 12,
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 40),
                                   child: TextButton(
-                                      onPressed:(){
+                                      onPressed: () {
                                         setState(() {
                                           loginSelected = false;
                                         });
@@ -86,7 +101,8 @@ class _SignPageState extends State<SignPage> {
                                       child: Text(
                                         AppStringsInEnglish.signup,
                                         style:
-                                        TextStyle(color: AppColors.black, fontSize: 20),
+                                        TextStyle(color: AppColors.black,
+                                            fontSize: 20),
                                       )),
                                 ),
                               ),
@@ -96,14 +112,15 @@ class _SignPageState extends State<SignPage> {
                       )
 
 
-
-
                       // start part two
                           : Container(
-                        height: MediaQuery.of(context).size.height * 1 / 12,
-                        decoration:  BoxDecoration(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 1 / 12,
+                        decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius:const BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(23),
                             topRight: Radius.circular(23),
                             bottomRight: Radius.circular(23),
@@ -113,20 +130,29 @@ class _SignPageState extends State<SignPage> {
                             color: Colors.black.withOpacity(0.5),
                             spreadRadius: 3,
                             blurRadius: 5,
-                            offset:const Offset(0, 4), // changes position of shadow
-                          ),],
+                            offset: const Offset(
+                                0, 4), // changes position of shadow
+                          ),
+                          ],
                         ),
-                        width: MediaQuery.of(context).size.width * 0.90,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width * 0.90,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
                               child: SizedBox(
-                                height: MediaQuery.of(context).size.height * 1 / 12,
+                                height: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height * 1 / 12,
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 40),
                                   child: TextButton(
-                                      onPressed: (){
+                                      onPressed: () {
                                         setState(() {
                                           loginSelected = true;
                                         });
@@ -134,7 +160,8 @@ class _SignPageState extends State<SignPage> {
                                       child: Text(
                                         AppStringsInEnglish.login,
                                         style:
-                                        TextStyle(color: AppColors.black, fontSize: 20),
+                                        TextStyle(color: AppColors.black,
+                                            fontSize: 20),
                                       )),
                                 ),
                               ),
@@ -144,19 +171,56 @@ class _SignPageState extends State<SignPage> {
                         ),
                       ),
                       AnimatedCrossFade(
-                        secondChild:signupForms(usernameController: myBloc.usernameSignupController, emailController: myBloc.emailSignupController, passwordController: myBloc.passwordSignupController, phoneController: myBloc.phoneSignupController, context: context,),
-                        firstChild:loginForms(emailController: myBloc.emailLoginController, passwordController: myBloc.passwordLoginController, context: context,),
-                        crossFadeState: loginSelected?CrossFadeState.showFirst:CrossFadeState.showSecond,
-                        duration:const Duration(milliseconds: 1000),
+                        secondChild: signupForms(usernameController: myBloc
+                            .usernameSignupController,
+                          emailController: myBloc.emailSignupController,
+                          passwordController: myBloc.passwordSignupController,
+                          phoneController: myBloc.phoneSignupController,
+                          context: context,),
+                        firstChild: loginForms(emailController: myBloc
+                            .emailLoginController, passwordController: myBloc
+                            .passwordLoginController, context: context,),
+                        crossFadeState: loginSelected
+                            ? CrossFadeState.showFirst
+                            : CrossFadeState.showSecond,
+                        duration: const Duration(milliseconds: 500),
                       ),
-                      loginSelected?defaultButton(color:AppColors.primary ,text: AppStringsInEnglish.login, function: (){},context: context):defaultButton(text: AppStringsInEnglish.signup, function: (){},context: context, color: AppColors.primary),
+                      loginSelected ? defaultButton(
+                          color: AppColors.primary,
+                          text: AppStringsInEnglish.login,
+                          //TODO: login logic
+                          function: () {},
+                          context: context) : defaultButton(
+                          text: AppStringsInEnglish.signup,
+                          //TODO: signup logic
+                          function: () {
+                            myBloc.testGoToOTP(context);
+                          },
+                          context: context,
+                          color: AppColors.primary),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 60, 0, 10),
-                        child: defaultButton(txtColor: AppColors.black,color: AppColors.white,  text: AppStringsInEnglish.google, function: (){}, context: context),
+                        child: defaultButton(
+                          img:Image.asset('assets/images/google.png') ,
+                          txtColor: AppColors.black,
+                          color: AppColors.white,
+                          text: AppStringsInEnglish.google,
+                          //TODO: google signup
+                          function: () {},
+                          context: context,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20),
-                        child: defaultButton(color: AppColors.facebookButton,txtColor: AppColors.white,text: AppStringsInEnglish.facebook, function: (){}, context: context),
+                        child: defaultButton(
+                          img:Image.asset('assets/images/facebook.png') ,
+                          color: AppColors.facebookButton,
+                          txtColor: AppColors.white,
+                          text: AppStringsInEnglish.facebook,
+                          //TODO: facebook signup
+                          function: () {},
+                          context: context,
+                        ),
                       ),
                     ],
                   ),

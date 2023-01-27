@@ -64,5 +64,5 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_native_splash:
-  image: assets/images/kemet.png
+  image: assets/images/kemet_splash.png
   background_image: assets/images/splash_screen_background_image.png
