@@ -44,6 +44,7 @@ Widget defaultTextFormField({
 
 Widget defaultButton({
   Widget? img,
+  double? width,
   double r = 10.0,
   required String text,
   required Color color,
@@ -52,7 +53,7 @@ Widget defaultButton({
   required context,
 }) =>
     Container(
-      width: MediaQuery.of(context).size.width * 0.80,
+      width:width==null?MediaQuery.of(context).size.width * 0.80:width,
       decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(
