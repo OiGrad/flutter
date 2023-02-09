@@ -1,40 +1,39 @@
-// import 'package:dio/dio.dart';
-// import 'package:flutter/material.dart';
-//
-//TODO:Handle the base URL
-// class DioHelper {
-//   static Dio dio;
-//
-//   static init() {
-//     dio = Dio(BaseOptions(
-//       baseUrl: 'https://student.valuxapps.com/api/',
-//       receiveDataWhenStatusError: true,
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'lang': 'ar',
-//       },
-//     ));
-//   }
-//
-//   static Future<Response> getData(
-//       {String url, Map<String, dynamic> query, lang, token}) async {
-//     ///TODo: this bloc of code is unSuccess
-//     dio.options.headers = {
-//       'lang': lang,
-//       'Content-Type': 'application/json',
-//       'Authorization': token ?? null,
-//     };
-//     return await dio.get(url, queryParameters: query);
-//   }
-//
-//   static Future<Response> postData(
-//       {@required url, query,@required data, lang = 'en', token}) async {
-//     ///TODo: this bloc of code is unSuccess
-//     dio.options.headers = {
-//       'lang': lang,
-//       'Content-Type': 'application/json',
-//       'Authorization': token ?? null,
-//     };
-//     return await dio.post(url, queryParameters: query, data: data);
-//   }
-// }
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+
+class DioHelper {
+  static late Dio dio;
+
+  static init() {
+    dio = Dio(
+      BaseOptions(
+        baseUrl: 'http://ec2-100-25-70-197.compute-1.amazonaws.com/',
+        receiveDataWhenStatusError: true,
+
+        /// If you want to handle the headers HERE"
+        // headers: {
+        //   'Content-Type': 'application/json',
+        //   'lang': 'ar',
+        // },
+      ),
+    );
+  }
+
+  static Future<Response> getData(
+      {required String url, Map<String, dynamic>? query, lang, token}) async {
+    return await dio.get(url, queryParameters: query);
+  }
+
+  static Future<Response> postData(
+      {required url, query, required data, lang = 'en', token}) async {
+    return await dio.post(url, queryParameters: query, data: data);
+  }
+
+  static Future<Response> putData({required String url,required data}) async {
+    return await dio.put(url,data: data);
+  }
+
+  static Future<Response> deleteData({required url,data})async{
+    return dio.delete(url,data: data);
+  }
+}
