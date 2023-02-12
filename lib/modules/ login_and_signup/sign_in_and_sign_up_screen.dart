@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/strings.dart';
-import 'package:kemet/helper/constants.dart';
+import 'package:kemet/core/constants.dart';
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_cubit.dart';
 import 'package:kemet/modules/widgets/sign_page_widgets.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
@@ -218,7 +218,9 @@ class _SignPageState extends State<SignPage> {
                           txtColor: AppColors.white,
                           text: AppStringsInEnglish.facebook,
                           //TODO: facebook signup
-                          function: () {},
+                          function: () {
+                            myBloc.testGoToNavigationBar(context);
+                          },
                           context: context,
                         ),
                       ),

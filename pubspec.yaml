@@ -20,6 +20,8 @@ dependencies:
   conditional_builder_null_safety:
   flutter_native_splash: ^2.2.15
   cupertino_icons: ^1.0.2
+  flutter_snake_navigationbar: ^0.6.1
+
 
 dev_dependencies:
   flutter_test:
