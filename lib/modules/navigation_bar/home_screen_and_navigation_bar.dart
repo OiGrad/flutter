@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
-import 'package:kemet/modules/home_screen/home_screen_and_navigation_bar_cubit.dart';
+import 'package:kemet/modules/navigation_bar/home_screen_and_navigation_bar_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

@@ -2,9 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kemet/core/navigation.dart';
-import 'package:kemet/core/constants.dart';
 import 'package:kemet/modules/OTP/otp_screen.dart';
-import 'package:kemet/modules/home_screen/home_screen.dart';
+import 'package:kemet/modules/navigation_bar/home_screen_and_navigation_bar.dart';
 import 'package:meta/meta.dart';
 
 part 'sign_in_and_sign_up_state.dart';

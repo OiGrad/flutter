@@ -3,7 +3,7 @@ import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/navigation.dart';
 import 'package:kemet/core/strings.dart';
-import 'package:kemet/modules/home_screen/home_screen.dart';
+import 'package:kemet/modules/navigation_bar/home_screen_and_navigation_bar.dart';
 import 'package:kemet/modules/widgets/on_boarding.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
 
