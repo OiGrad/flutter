@@ -130,7 +130,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         );
                       });
                     } else {
-                      navigateTo(context, const HomeScreen());
+                      navigateTo(context, const HomeScreenAndNavigationBar());
                     }
                   },
                   context: context,

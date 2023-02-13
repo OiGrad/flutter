@@ -34,7 +34,7 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
   }
 
   testGoToNavigationBar(context){
-    navigateTo(context,const HomeScreen());
+    navigateTo(context,const HomeScreenAndNavigationBar());
   }
 
 
