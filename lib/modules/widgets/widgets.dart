@@ -7,15 +7,29 @@ Widget defaultTextFormField({
   function,
   required controller,
   required label,
+  labelColor,
+  required bool arabic,
   hintText,
+  icon,
+  iconColor,
 }) {
   return Container(
     decoration: BoxDecoration(
+      color: AppColors.white,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 3,
+          blurRadius: 7,
+          offset: const Offset(0, 3), // changes position of shadow
+        ),
+      ],
       borderRadius: BorderRadius.circular(
         5.0,
       ),
       border: Border.all(
         color: AppColors.black,
+        width: 0.1
       ),
     ),
     child: TextFormField(
@@ -25,16 +39,20 @@ Widget defaultTextFormField({
       controller: controller,
       decoration: InputDecoration(
         border: InputBorder.none,
-        label: Row(
-          children: [
-            const SizedBox(
-              width: 10,
-            ),
-            Text(
-              label,
-              style: TextStyle(color: AppColors.black),
-            ),
-          ],
+        label: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              if(icon != null)Icon(icon,color: iconColor,),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(
+                label,
+                style: TextStyle(color:labelColor==null?AppColors.black:labelColor),
+              ),
+            ],
+          ),
         ),
         hintText: hintText,
       ),
@@ -53,7 +71,7 @@ Widget defaultButton({
   required context,
 }) =>
     Container(
-      width:width==null?MediaQuery.of(context).size.width * 0.80:width,
+      width: width==null?MediaQuery.of(context).size.width * 0.80:width,
       decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(
@@ -96,3 +114,4 @@ Widget defaultButton({
               ),
       ),
     );
+

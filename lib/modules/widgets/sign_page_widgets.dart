@@ -171,6 +171,7 @@ Widget loginForms({required emailController,required passwordController,required
     child: Column(
       children: [
         defaultTextFormField(
+          arabic: false,
           validator: (value) {
             if (value.length < 5) {
               return 'email  is invalid';
@@ -185,6 +186,7 @@ Widget loginForms({required emailController,required passwordController,required
           height: MediaQuery.of(context).size.height*1/60,
         ),
         defaultTextFormField(
+          arabic: false,
           validator: (value) {
             if (value.length < 5) {
               return 'password is invalid';
@@ -206,6 +208,7 @@ Widget signupForms({required usernameController ,required emailController,requir
     child: Column(
       children: [
         defaultTextFormField(
+          arabic: false,
           validator: (value) {
             if (value.length < 5) {
               return 'username  is invalid';
@@ -220,6 +223,7 @@ Widget signupForms({required usernameController ,required emailController,requir
           height: MediaQuery.of(context).size.height*1/60,
         ),
         defaultTextFormField(
+          arabic: false,
           validator: (value) {
             if (value.length < 5) {
               return 'email  is invalid';
@@ -234,6 +238,7 @@ Widget signupForms({required usernameController ,required emailController,requir
           height: MediaQuery.of(context).size.height*1/60,
         ),
         defaultTextFormField(
+          arabic: false,
           validator: (value) {
             if (value.length < 5) {
               return 'password is invalid';
@@ -248,6 +253,7 @@ Widget signupForms({required usernameController ,required emailController,requir
           height: MediaQuery.of(context).size.height*1/60,
         ),
         defaultTextFormField(
+          arabic: false,
           validator: (value) {
             if (value.length < 10) {
               return 'phone is invalid';

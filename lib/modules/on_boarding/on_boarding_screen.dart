@@ -115,8 +115,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 if(index==2)
                   searchField(context: context,textEditingController: textEditingController),
                 defaultButton(
-                  r: 3,
-                  width: MediaQueryValues(context).width * 2 / 4,
+                  r: 16,
                   text: index == 2
                       ? AppStringsInEnglish.getStarted
                       : AppStringsInEnglish.next,
@@ -130,7 +129,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         );
                       });
                     } else {
-                      navigateTo(context, const HomeScreenAndNavigationBar());
+                      navigateToAndReplacement(context, const HomeScreenAndNavigationBar());
                     }
                   },
                   context: context,

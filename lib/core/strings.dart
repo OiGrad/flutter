@@ -1,3 +1,4 @@
+
 class AppStringsInEnglish{
   static const String appName = 'Kemet App';
 
@@ -36,4 +37,23 @@ class AppStringsInEnglish{
 
   static const String search = 'Search';
 
+  static const String userName = 'Abanob Ashraf';
+  static const String userLocation = 'Cairo, Egypt';
+
 }
+
+class AppStringsInArabic{
+  static const String welcomeInHomeScreen = "أهلا , أبانوب أشرف";
+  static const String governorate = "محافظة القاهرة";
+  static const String whereWillYouGo = "قولنا عايز تروح فين ؟";
+  static const String search = "بحث";
+  static const String popularPlaces = "الأماكن المشهورة";
+  static const String egyptGovernorates = "محافظات مصر";
+  static const String categories = "التقسيمات";
+  static const String showMore = "عرض المزيد";
+  static const String favoritePlacesForYou = "الأماكن المفضلة ليك";
+}
+
+
+
+

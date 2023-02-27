@@ -19,7 +19,11 @@ class HomeScreenAndNavigationBarCubit
     borderRadius: BorderRadius.all(Radius.circular(15)),
   );
   EdgeInsets padding = const EdgeInsets.all(30);
-  SnakeShape snakeShape = SnakeShape.circle;
+  SnakeShape mySnakeShape = SnakeShape.circle;
+
+
+
+
 
   List<BottomNavigationBarItem> bottomNavigationBarItems = const [
     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
