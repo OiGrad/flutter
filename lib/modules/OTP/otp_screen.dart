@@ -9,16 +9,17 @@ import 'package:kemet/modules/on_boarding/on_boarding_screen.dart';
 import 'package:kemet/modules/widgets/otp_widgets.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
 
+//TODO:add single child scroll view.
 class OTPScreen extends StatelessWidget {
   const OTPScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:(context)=>OtpCubit(),
-      child: BlocConsumer<OtpCubit,OtpState>(
-        listener: (context , state){},
-        builder: (context,state){
+      create: (context) => OtpCubit(),
+      child: BlocConsumer<OtpCubit, OtpState>(
+        listener: (context, state) {},
+        builder: (context, state) {
           var myBloc = BlocProvider.of<OtpCubit>(context);
           return Scaffold(
             body: SizedBox(
