@@ -3,6 +3,10 @@ import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/strings.dart';
 
+import '../../core/navigation.dart';
+import '../city_details/city_details_screen.dart';
+import '../place_details/place_details_screen.dart';
+
 Widget welcomeWidget(context) {
   return Column(
     children: [
@@ -120,62 +124,12 @@ Widget categoryWidget(context) {
 }
 
 Widget cardOfPlace(context) {
-  return Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(5),
-      color: AppColors.white,
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 1,
-          blurRadius: 2,
-          offset: const Offset(0, 3), // changes position of shadow
-        ),
-      ],
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: MediaQueryValues(context).height * 2 / 14,
-          child: Image.asset('assets/images/test.png'),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const Text(
-                'الكنيسة المعلقة',
-                style: TextStyle(
-                    fontFamily: 'Tajawal', fontWeight: FontWeight.bold),
-              ),
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: AppColors.primary,
-                    minRadius: 10,
-                    child:
-                        Icon(Icons.favorite, size: 15, color: AppColors.white),
-                  ),
-                  const Spacer(),
-                  const Text(
-                    'مبني أثري',
-                    style: TextStyle(fontFamily: 'Tajawal'),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        )
-      ],
-    ),
-  );
-}
-
-Widget cardOfPlace2(context) {
-  return Container(
-    decoration: BoxDecoration(
+  return InkWell(
+    onTap: () {
+      navigateTo(context, PlaceView());
+    },
+    child: Container(
+      decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         color: AppColors.white,
         boxShadow: [
@@ -185,45 +139,107 @@ Widget cardOfPlace2(context) {
             blurRadius: 2,
             offset: const Offset(0, 3), // changes position of shadow
           ),
-        ]),
-    height: MediaQueryValues(context).height * 5 / 20,
-    width: MediaQueryValues(context).width * 5 / 11,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: MediaQueryValues(context).height * 2 / 14,
-          child: Image.asset('assets/images/cairo.png'),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const Text(
-                'القاهره',
-                style: TextStyle(
-                    fontFamily: 'Tajawal', fontWeight: FontWeight.bold),
-              ),
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: AppColors.primary,
-                    minRadius: 10,
-                    child:
-                        Icon(Icons.favorite, size: 15, color: AppColors.white),
-                  ),
-                  const Spacer(),
-                  const Text(
-                    'العاصمه',
-                    style: TextStyle(fontFamily: 'Tajawal'),
-                  ),
-                ],
-              ),
-            ],
+        ],
+      ),
+      height: MediaQueryValues(context).height * 5 / 20,
+      width: MediaQueryValues(context).width * 5 / 11,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            height: MediaQueryValues(context).height * 2 / 14,
+            child: Image.asset('assets/images/test.png'),
           ),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const Text(
+                  'الكنيسة المعلقة',
+                  style: TextStyle(
+                      fontFamily: 'Tajawal', fontWeight: FontWeight.bold),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: AppColors.primary,
+                      minRadius: 10,
+                      child: Icon(Icons.favorite,
+                          size: 15, color: AppColors.white),
+                    ),
+                    const Text(
+                      'مبني أثري',
+                      style: TextStyle(fontFamily: 'Tajawal'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+  );
+}
+
+Widget cardOfPlace2(context) {
+  return InkWell(
+    onTap: () {
+      navigateTo(context, CityView());
+    },
+    child: Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 2,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ]),
+      height: MediaQueryValues(context).height * 5 / 20,
+      width: MediaQueryValues(context).width * 5 / 11,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            height: MediaQueryValues(context).height * 2 / 14,
+            child: Image.asset('assets/images/cairo.png'),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const Text(
+                  'القاهره',
+                  style: TextStyle(
+                      fontFamily: 'Tajawal', fontWeight: FontWeight.bold),
+                ),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: AppColors.primary,
+                      minRadius: 10,
+                      child: Icon(Icons.favorite,
+                          size: 15, color: AppColors.white),
+                    ),
+                    const Spacer(),
+                    const Text(
+                      'العاصمه',
+                      style: TextStyle(fontFamily: 'Tajawal'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     ),
   );
 }

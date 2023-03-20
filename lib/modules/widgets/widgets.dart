@@ -27,10 +27,7 @@ Widget defaultTextFormField({
       borderRadius: BorderRadius.circular(
         5.0,
       ),
-      border: Border.all(
-        color: AppColors.black,
-        width: 0.1
-      ),
+      border: Border.all(color: AppColors.black, width: 0.1),
     ),
     child: TextFormField(
       initialValue: initValue,
@@ -43,13 +40,18 @@ Widget defaultTextFormField({
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              if(icon != null)Icon(icon,color: iconColor,),
+              if (icon != null)
+                Icon(
+                  icon,
+                  color: iconColor,
+                ),
               const SizedBox(
                 width: 10,
               ),
               Text(
                 label,
-                style: TextStyle(color:labelColor==null?AppColors.black:labelColor),
+                style: TextStyle(
+                    color: labelColor == null ? AppColors.black : labelColor),
               ),
             ],
           ),
@@ -63,6 +65,7 @@ Widget defaultTextFormField({
 Widget defaultButton({
   Widget? img,
   double? width,
+  double? height,
   double r = 10.0,
   required String text,
   required Color color,
@@ -71,7 +74,8 @@ Widget defaultButton({
   required context,
 }) =>
     Container(
-      width: width==null?MediaQuery.of(context).size.width * 0.80:width,
+      height: height ?? 48,
+      width: width == null ? MediaQuery.of(context).size.width * 0.80 : width,
       decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(
@@ -84,8 +88,7 @@ Widget defaultButton({
               blurRadius: 2,
               offset: const Offset(0, 2), // changes position of shadow
             ),
-          ]
-      ),
+          ]),
       child: TextButton(
         onPressed: function,
         child: img == null
@@ -114,4 +117,3 @@ Widget defaultButton({
               ),
       ),
     );
-
