@@ -13,12 +13,13 @@ import '../widgets/place_details.dart';
 String title = "الكنيسة المعلقة";
 double placeRating = 5;
 double userRating = 0;
-String shortDiscryption = "short discryption";
-String fees = "Free";
+String shortDiscryption = "مبني أثري قبطي";
+String fees = "الدخول مجانا";
 String briefHistory =
-    'brief history, lorem ipsum loremipsum lorem ipsum lorem ipsum loremipsum ';
-String location = "Location";
-String NMS = "Nearest Metro Station";
+    'تقع الكنيسة المعلقة في حي مصر القديمة، في منطقة القاهرة القبطية الأثرية الهامة، فهي على مقربة من جامع عمرو بن العاص، ومعبد بن عزرا اليهودي، وكنيسة القديس مينا بجوار حصن بابليون، وكنيسة الشهيد مرقوريوس (أبو سيفين)، وكنائس عديدة أخرى. وسميت بالمعلقة لأنها بنيت على برجين من الأبراج القديمة للحصن الروماني[؟] (حصن بابليون)، ذلك الذي كان قد بناه الإمبراطور تراجان في القرن الثاني الميلادي، وتعتبر المعلقة هي أقدم الكنائس التي لا تزال باقية في مصر ( أعرف أكتر )';
+String location = "حي مصر القديمة، على شارع ماري جرجس";
+String NMS = "أقرب محطة مترو للكنيسة المعلقة هي مارجرجس";
+
 List<String> imags = [
   'assets/images/placeImage.jpg',
   'assets/images/placeImage.jpg',
@@ -63,7 +64,7 @@ class PlaceView extends StatelessWidget {
           const SizedBox(),
           headNote(
             context,
-            text: AppStringsInEnglish.generalInfo,
+            text: AppStringsInArabic.generalInfo,
             icon: Icons.content_paste,
           ),
           Padding(
@@ -88,7 +89,7 @@ class PlaceView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: const [
                 Text(
-                  AppStringsInEnglish.rate,
+                  AppStringsInArabic.rate,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
               ],
@@ -116,28 +117,33 @@ class PlaceView extends StatelessWidget {
             r: 5,
             height: 40,
             width: MediaQuery.of(context).size.width * 0.4,
-            text: AppStringsInEnglish.save,
+            text: AppStringsInArabic.save,
             color: const Color.fromARGB(255, 228, 164, 37),
             function: () {},
             context: context,
           ),
           const SizedBox(),
-          headNote(context, text: AppStringsInEnglish.briefHistory),
+          headNote(context, text: AppStringsInArabic.briefHistory),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
             child: Text(
               briefHistory,
+              textAlign: TextAlign.end,
             ),
           ),
-          headNote(context, text: AppStringsInEnglish.location),
-          Text(location),
-          Text(NMS),
+          headNote(context, text: AppStringsInArabic.location),
+          Text(
+            location,
+          ),
+          Text(
+            NMS,
+          ),
           const SizedBox(height: 5),
           defaultButton(
             r: 5,
             height: 40,
             width: MediaQuery.of(context).size.width * 0.4,
-            text: AppStringsInEnglish.directions,
+            text: AppStringsInArabic.directions,
             color: const Color.fromARGB(255, 228, 164, 37),
             function: () {
               navigateTo(context,
@@ -148,7 +154,7 @@ class PlaceView extends StatelessWidget {
 
           const SizedBox(),
 
-          headNote(context, text: AppStringsInEnglish.gallery),
+          headNote(context, text: AppStringsInArabic.gallery),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
             child: SizedBox(
@@ -194,7 +200,7 @@ class PlaceView extends StatelessWidget {
             ),
           ),*/
 
-          headNote(context, text: AppStringsInEnglish.reviews)
+          headNote(context, text: AppStringsInArabic.reviews)
           //TODO: add the post component.
         ],
       ),

@@ -13,20 +13,23 @@ class EgyptGovernoratesScreen extends StatelessWidget {
         leading: Icon(Icons.arrow_back,color: AppColors.primary,),
         title:const Text(AppStringsInArabic.egyptGovernorates,style: TextStyle(fontSize: 18,fontFamily: 'Tajawal'),),
       ),
-      body: GridView.builder(
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: 5,
-        gridDelegate:
-        const SliverGridDelegateWithFixedCrossAxisCount(
-          mainAxisExtent: 180,
-          crossAxisCount: 2,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: GridView.builder(
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 5,
+          gridDelegate:
+          const SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisExtent: 180,
+            crossAxisCount: 2,
+            mainAxisSpacing: 20,
+            crossAxisSpacing: 20,
+          ),
+          itemBuilder: (context, item) {
+            return cardOfGov(context);
+          },
         ),
-        itemBuilder: (context, item) {
-          return cardOfPlace2(context);
-        },
       ),
     );
   }

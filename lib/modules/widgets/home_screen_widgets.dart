@@ -184,7 +184,7 @@ Widget cardOfPlace(context) {
   );
 }
 
-Widget cardOfPlace2(context) {
+Widget cardOfGov(context) {
   return InkWell(
     onTap: () {
       navigateTo(context, CityView());
