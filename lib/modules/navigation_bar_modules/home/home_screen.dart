@@ -110,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                           crossAxisSpacing: MediaQueryValues(context).width*1/30,
                         ),
                         itemBuilder: (context, item) {
-                          return cardOfPlace2(context);
+                          return cardOfGov(context);
                         },
                       ),
                     ],
