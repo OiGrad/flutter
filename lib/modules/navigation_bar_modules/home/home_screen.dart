@@ -3,12 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/models/user_model.dart';
 import 'package:kemet/modules/navigation_bar_modules/home/home_screen_cubit.dart';
 import 'package:kemet/modules/widgets/home_screen_widgets.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+
+
 
   @override
   Widget build(BuildContext context) {
