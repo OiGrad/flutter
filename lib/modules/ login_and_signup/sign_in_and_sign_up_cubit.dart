@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kemet/core/navigation.dart';
+import 'package:kemet/helper/end_points.dart';
+import 'package:kemet/helper/remote/dio_helper.dart';
 import 'package:kemet/modules/OTP/otp_screen.dart';
 import 'package:kemet/modules/navigation_bar/home_screen_and_navigation_bar.dart';
 import 'package:meta/meta.dart';
@@ -20,23 +22,39 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
   var phoneSignupController = TextEditingController();
 
   // bool loginSelected = false;
-   toggleToLogin(){
+  toggleToLogin() {
     // loginSelected = true;
     emit(ToggleToLoginSuccess());
   }
-   toggleToSignUp(){
+
+  toggleToSignUp() {
     // loginSelected = false;
     emit(ToggleToSignupSuccess());
   }
 
-  testGoToOTP(context){
-     navigateTo(context,const OTPScreen());
+  signUp() {
+    emit(SignupWithEmailLoading());
+    DioHelper.postData(
+      url: AppEndPoints.signUp,
+      data: {
+        'email':emailSignupController.text.trim(),
+        'password':passwordSignupController.text.trim(),
+        'name':usernameSignupController.text.trim(),
+        'username':usernameSignupController.text.trim(),
+      },
+    ).then((value) {
+      print(value.data);
+      emit(SignupWithEmailSuccess());
+    }).catchError((err) {
+      emit(SignupWithEmailError());
+    });
   }
 
-  testGoToNavigationBar(context){
-    navigateTo(context,const HomeScreenAndNavigationBar());
+  testGoToOTP(context) {
+    navigateTo(context, const OTPScreen());
   }
 
-
-
+  testGoToNavigationBar(context) {
+    navigateTo(context, const HomeScreenAndNavigationBar());
+  }
 }

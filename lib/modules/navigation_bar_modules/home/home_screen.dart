@@ -30,15 +30,17 @@ class HomeScreen extends StatelessWidget {
                       textWidget(context, AppStringsInArabic.whereWillYouGo,
                           25.0, AppColors.black),
                       defaultTextFormField(
-                          arabic: true,
-                          validator: (value) {
-                            myBloc.validateSearchResult(value);
-                          },
-                          controller: myBloc.searchController,
-                          label: AppStringsInArabic.search,
-                          labelColor: AppColors.hint,
-                          icon: Icons.search,
-                          iconColor: AppColors.hint),
+                        arabic: true,
+                        validator: (value) {
+                          myBloc.validateSearchResult(value);
+                        },
+                        controller: myBloc.searchController,
+                        label: AppStringsInArabic.search,
+                        labelColor: AppColors.hint,
+                        icon: Icons.search,
+                        iconColor: AppColors.hint,
+                        textInputType: TextInputType.text,
+                      ),
 
                       ///TODO : Categories
                       textWidget(context, AppStringsInArabic.categories, 18.0,
@@ -64,12 +66,13 @@ class HomeScreen extends StatelessWidget {
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: 6,
-                        gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisExtent: MediaQueryValues(context).height*1/4,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisExtent:
+                              MediaQueryValues(context).height * 1 / 4,
                           crossAxisCount: 2,
                           mainAxisSpacing: 20,
-                          crossAxisSpacing: MediaQueryValues(context).width*1/30,
+                          crossAxisSpacing:
+                              MediaQueryValues(context).width * 1 / 30,
                         ),
                         itemBuilder: (context, item) {
                           return cardOfPlace(context);
@@ -80,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                       Row(
                         children: [
                           InkWell(
-                            onTap: (){
+                            onTap: () {
                               myBloc.goToEgyptGovernorates(context);
                             },
                             child: textWidget(
@@ -102,12 +105,13 @@ class HomeScreen extends StatelessWidget {
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: 6,
-                        gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisExtent: MediaQueryValues(context).height*1/4,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisExtent:
+                              MediaQueryValues(context).height * 1 / 4,
                           crossAxisCount: 2,
                           mainAxisSpacing: 20,
-                          crossAxisSpacing: MediaQueryValues(context).width*1/30,
+                          crossAxisSpacing:
+                              MediaQueryValues(context).width * 1 / 30,
                         ),
                         itemBuilder: (context, item) {
                           return cardOfGov(context);

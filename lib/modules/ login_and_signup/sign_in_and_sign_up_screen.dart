@@ -189,12 +189,14 @@ class _SignPageState extends State<SignPage> {
                           color: AppColors.primary,
                           text: AppStringsInEnglish.login,
                           //TODO: login logic
-                          function: () {},
+                          function: () {
+
+                          },
                           context: context) : defaultButton(
                           text: AppStringsInEnglish.signup,
                           //TODO: signup logic
                           function: () {
-                            myBloc.testGoToOTP(context);
+                            myBloc.signUp();
                           },
                           context: context,
                           color: AppColors.primary),
