@@ -55,6 +55,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     });
   }
 
+
   void getCities({required BuildContext context}) async {
     emit(GetCitiesLoading());
 
