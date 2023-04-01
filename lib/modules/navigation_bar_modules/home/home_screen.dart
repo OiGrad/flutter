@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/helper/shimmer/card_shimmer.dart';
+import 'package:kemet/helper/shimmer/category_shimmer.dart';
 import 'package:kemet/modules/navigation_bar_modules/home/home_screen_cubit.dart';
 import 'package:kemet/modules/widgets/home_screen_widgets.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
@@ -56,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: 5,
                             itemBuilder: (context, item) =>
-                                categoryWidget(context),
+                                CategoryShimmer(),
                           ),
                         ),
                       ),
@@ -78,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                               MediaQueryValues(context).width * 1 / 30,
                         ),
                         itemBuilder: (context, item) {
-                          return cardOfPlace(context);
+                          return CardShimmer();
                         },
                       ),
 
