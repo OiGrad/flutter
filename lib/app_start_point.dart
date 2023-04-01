@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/strings.dart';
 import 'package:kemet/core/themes.dart';
+import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_cubit.dart';
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -8,13 +10,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner:false ,
-      title: AppStringsInEnglish.appName,
-      theme: appLightTheme(),
-      darkTheme:appDarkTheme(),
-      //TODO:Handle the start point
-      home:const SignPage(),
+    return BlocProvider(
+      create: (ctx)=>SignInAndSignUpCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner:false ,
+        title: AppStringsInEnglish.appName,
+        theme: appLightTheme(),
+        darkTheme:appDarkTheme(),
+        //TODO:Handle the start point
+        home:const SignPage(),
+      ),
     );
   }
 }

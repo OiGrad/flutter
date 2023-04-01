@@ -5,6 +5,7 @@ Widget defaultTextFormField({
   initValue,
   required validator,
   required textInputType,
+  required isPassword,
   function,
   required controller,
   required label,
@@ -33,12 +34,14 @@ Widget defaultTextFormField({
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        obscureText: isPassword,
         keyboardType:textInputType ,
         initialValue: initValue,
         validator: validator,
         onFieldSubmitted: (value) {},
         controller: controller,
         decoration: InputDecoration(
+
           border: InputBorder.none,
           label: Row(
             children: [

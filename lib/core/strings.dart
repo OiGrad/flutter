@@ -57,7 +57,7 @@ class AppStringsInEnglish {
 }
 
 class AppStringsInArabic {
-  static const String welcomeInHomeScreen = "أهلا , أبانوب أشرف";
+  static const String welcomeInHomeScreen = " أهلا ";
   static const String governorate = "محافظة القاهرة";
   static const String whereWillYouGo = "قولنا عايز تروح فين ؟";
   static const String search = "بحث";

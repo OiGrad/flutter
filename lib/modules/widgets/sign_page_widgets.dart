@@ -181,7 +181,7 @@ Widget loginForms({required emailController,required passwordController,required
           },
           controller: emailController,
           label: AppStringsInEnglish.emailAddress,
-          textInputType: TextInputType.emailAddress,
+          textInputType: TextInputType.emailAddress, isPassword: false,
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height*1/60,
@@ -197,7 +197,7 @@ Widget loginForms({required emailController,required passwordController,required
           },
           controller: passwordController,
           label: AppStringsInEnglish.password,
-          textInputType: TextInputType.visiblePassword,
+          textInputType: TextInputType.visiblePassword, isPassword: true,
         )
       ],
     ),
@@ -220,7 +220,7 @@ Widget signupForms({required usernameController ,required emailController,requir
           },
           controller: usernameController,
           label: AppStringsInEnglish.username,
-          textInputType: TextInputType.name,
+          textInputType: TextInputType.name, isPassword: false,
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height*1/60,
@@ -236,7 +236,7 @@ Widget signupForms({required usernameController ,required emailController,requir
           },
           controller: emailController,
           label: AppStringsInEnglish.emailAddress,
-          textInputType: TextInputType.emailAddress,
+          textInputType: TextInputType.emailAddress, isPassword: false,
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height*1/60,
@@ -252,7 +252,7 @@ Widget signupForms({required usernameController ,required emailController,requir
           },
           controller: passwordController,
           label: AppStringsInEnglish.password,
-          textInputType: TextInputType.visiblePassword,
+          textInputType: TextInputType.visiblePassword, isPassword: true,
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height*1/60,
@@ -268,7 +268,7 @@ Widget signupForms({required usernameController ,required emailController,requir
           },
           controller: phoneController,
           label: AppStringsInEnglish.phoneNumber,
-          textInputType: TextInputType.phone,
+          textInputType: TextInputType.phone, isPassword: false,
         )
       ],
     ),

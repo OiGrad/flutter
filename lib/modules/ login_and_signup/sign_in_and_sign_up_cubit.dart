@@ -34,57 +34,64 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
     // loginSelected = false;
     emit(ToggleToSignupSuccess());
   }
+
   UserModel? userModel;
 
-  signUp(context) {
+  signUp(context) async{
     emit(SignupWithEmailLoading());
-    DioHelper.postData(
+
+
+    await DioHelper.postData(
       url: AppEndPoints.signUp,
       data: {
-        'email':emailSignupController.text.trim(),
-        'password':passwordSignupController.text.trim(),
-        'name':usernameSignupController.text.trim(),
-        'username':usernameSignupController.text.trim(),
+        'email': emailSignupController.text.trim(),
+        'password': passwordSignupController.text.trim(),
+        'name': usernameSignupController.text.trim(),
+        'username': usernameSignupController.text.trim(),
       },
     ).then((value) {
-      showSnackBar(context: context, text: 'Signup successfully', clr: Colors.green);
+      showSnackBar(
+          context: context, text: 'Signup successfully', clr: Colors.green);
       // print(value.data);
       userModel = UserModel.fromJson(value.data);
-      navigateToAndReplacement(context,const HomeScreen());
+      navigateToAndReplacement(context, const HomeScreenAndNavigationBar());
       // print(userModel!.name);
       // print(userModel!.username);
       // print(userModel!.email);
 
       emit(SignupWithEmailSuccess());
     }).catchError((err) {
-      // print(err.toString());
+      print(err.toString());
       showSnackBar(context: context, text: 'Signup Error', clr: Colors.red);
       emit(SignupWithEmailError());
     });
   }
 
 
-
-  login(context) {
+  login(context) async{
     emit(LoginLoading());
-    DioHelper.postData(
+    await DioHelper.postData(
       url: AppEndPoints.login,
       data: {
-        'email':emailSignupController.text.trim(),
-        'password':passwordSignupController.text.trim(),
+        'email': emailLoginController.text.trim(),
+        'password': passwordLoginController.text.trim(),
       },
     ).then((value) {
-      showSnackBar(context: context, text: 'Login successfully', clr: Colors.green);
+      showSnackBar(
+          context: context, text: 'Login successfully', clr: Colors.green);
       // print(value.data);
       userModel = UserModel.fromJson(value.data);
-      navigateToAndReplacement(context,const HomeScreen());
+
+      navigateToAndReplacement(context, const HomeScreen());
       // print(userModel!.name);
       // print(userModel!.username);
       // print(userModel!.email);
 
       emit(LoginSuccess());
     }).catchError((err) {
-      // print(err.toString());
+      print(emailLoginController.text.trim());
+      print(passwordLoginController.text.trim());
+      print(err.toString());
       showSnackBar(context: context, text: 'Login Error', clr: Colors.red);
       emit(LoginError());
     });

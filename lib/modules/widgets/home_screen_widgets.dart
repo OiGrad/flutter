@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_cubit.dart';
 
 import '../../core/navigation.dart';
 import '../city_details/city_details_screen.dart';
@@ -38,13 +40,31 @@ Widget welcomeWidget(context) {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      AppStringsInArabic.welcomeInHomeScreen,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: AppColors.white,
-                        fontFamily: 'Tajawal',
-                      ),
+                    Row(
+                      children: [
+                        BlocConsumer<SignInAndSignUpCubit , SignInAndSignUpState>(
+                          listener:(context , state){} ,
+                          builder: (context , state){
+                            return Text(
+                              BlocProvider.of<SignInAndSignUpCubit>(context).userModel!.username,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: AppColors.white,
+                                fontFamily: 'Tajawal',
+                              ),
+                            );
+                          },
+                        ),
+
+                        Text(
+                          AppStringsInArabic.welcomeInHomeScreen,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: AppColors.white,
+                            fontFamily: 'Tajawal',
+                          ),
+                        ),
+                      ],
                     ),
                     const Spacer(),
                     Text(
