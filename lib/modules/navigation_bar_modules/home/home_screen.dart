@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/colors.dart';
@@ -49,16 +50,39 @@ class HomeScreen extends StatelessWidget {
                       ),
 
                       ///TODO : Categories
-                      textWidget(context, AppStringsInArabic.categories, 18.0,
-                          AppColors.black),
-                      SizedBox(
-                        height: 50,
-                        child: Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 5,
-                            itemBuilder: (context, item) => CategoryShimmer(),
+                      textWidget(
+                        context,
+                        AppStringsInArabic.categories,
+                        18.0,
+                        AppColors.black,
+                      ),
+
+
+                      //TODO : Remove NOT !!!!!!!!!!!!!!!!!!!!!!!!!
+                      ConditionalBuilder(
+                        condition: state is !GetCategoryLoading,
+                        builder: (context) => SizedBox(
+                          height: 50,
+                          child: Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 3,
+                              itemBuilder: (context, item) =>
+                                  const CategoryShimmer(),
+                            ),
+                          ),
+                        ),
+                        fallback: (context) => SizedBox(
+                          height: 50,
+                          child: Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 5,
+                              itemBuilder: (context, item) =>
+                                  categoryWidget(context),
+                            ),
                           ),
                         ),
                       ),
@@ -67,21 +91,42 @@ class HomeScreen extends StatelessWidget {
                       textWidget(context, AppStringsInArabic.popularPlaces,
                           18.0, AppColors.black),
 
-                      GridView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 6,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisExtent:
-                              MediaQueryValues(context).height * 1 / 4,
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 20,
-                          crossAxisSpacing:
-                              MediaQueryValues(context).width * 1 / 30,
+                      ConditionalBuilder(
+                        condition: state is !GetPlacesLoading,
+                        builder: (context) => GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 3,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent:
+                                MediaQueryValues(context).height * 1 / 4,
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing:
+                                MediaQueryValues(context).width * 1 / 30,
+                          ),
+                          itemBuilder: (context, item) {
+                            return const CardShimmer();
+                          },
                         ),
-                        itemBuilder: (context, item) {
-                          return CardShimmer();
-                        },
+                        fallback: (context) => GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 6,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent:
+                                MediaQueryValues(context).height * 1 / 4,
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing:
+                                MediaQueryValues(context).width * 1 / 30,
+                          ),
+                          itemBuilder: (context, item) {
+                            return cardOfPlace(context);
+                          },
+                        ),
                       ),
 
                       ///TODO : Egypt
@@ -106,21 +151,43 @@ class HomeScreen extends StatelessWidget {
                               AppColors.black),
                         ],
                       ),
-                      GridView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 6,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisExtent:
-                              MediaQueryValues(context).height * 1 / 4,
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 20,
-                          crossAxisSpacing:
-                              MediaQueryValues(context).width * 1 / 30,
+
+                      ConditionalBuilder(
+                        condition: state is !GetCitiesLoading,
+                        builder: (context) => GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 3,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent:
+                                MediaQueryValues(context).height * 1 / 4,
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing:
+                                MediaQueryValues(context).width * 1 / 30,
+                          ),
+                          itemBuilder: (context, item) {
+                            return const CardShimmer();
+                          },
                         ),
-                        itemBuilder: (context, item) {
-                          return cardOfGov(context);
-                        },
+                        fallback: (context) => GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 6,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent:
+                                MediaQueryValues(context).height * 1 / 4,
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing:
+                                MediaQueryValues(context).width * 1 / 30,
+                          ),
+                          itemBuilder: (context, item) {
+                            return cardOfGov(context);
+                          },
+                        ),
                       ),
                     ],
                   ),

@@ -74,23 +74,6 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   final searchController = TextEditingController();
 
   void validateSearchResult(value) {}
