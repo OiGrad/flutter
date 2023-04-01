@@ -82,7 +82,7 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
       // print(value.data);
       userModel = UserModel.fromJson(value.data);
 
-      navigateToAndReplacement(context, const HomeScreen());
+      navigateToAndReplacement(context, const HomeScreenAndNavigationBar());
       // print(userModel!.name);
       // print(userModel!.username);
       // print(userModel!.email);

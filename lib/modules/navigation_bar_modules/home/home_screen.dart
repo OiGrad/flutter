@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeScreenCubit(),
+      create: (context) => HomeScreenCubit()..getCategory(context: context),
       child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
         listener: (context, state) {},
         builder: (context, state) {
