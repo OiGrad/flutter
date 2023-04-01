@@ -12,13 +12,13 @@ import 'package:kemet/modules/widgets/widgets.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeScreenCubit()..getCategory(context: context),
+      create: (context) => HomeScreenCubit()
+        ..getCategory(context: context)
+        ..getPlaces(context: context)
+        ..getCities(context: context),
       child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -44,7 +44,8 @@ class HomeScreen extends StatelessWidget {
                         labelColor: AppColors.hint,
                         icon: Icons.search,
                         iconColor: AppColors.hint,
-                        textInputType: TextInputType.text, isPassword: false,
+                        textInputType: TextInputType.text,
+                        isPassword: false,
                       ),
 
                       ///TODO : Categories
@@ -57,8 +58,7 @@ class HomeScreen extends StatelessWidget {
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: 5,
-                            itemBuilder: (context, item) =>
-                                CategoryShimmer(),
+                            itemBuilder: (context, item) => CategoryShimmer(),
                           ),
                         ),
                       ),

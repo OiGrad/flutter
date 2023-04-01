@@ -9,6 +9,15 @@ class GetCategoryLoading extends HomeScreenState {}
 class GetCategorySuccess extends HomeScreenState {}
 class GetCategoryError extends HomeScreenState {}
 
+class GetPlacesLoading extends HomeScreenState {}
+class GetPlacesSuccess extends HomeScreenState {}
+class GetPlacesError extends HomeScreenState {}
+
+class GetCitiesLoading extends HomeScreenState {}
+class GetCitiesSuccess extends HomeScreenState {}
+class GetCitiesError extends HomeScreenState {}
+
+
 
 
 
