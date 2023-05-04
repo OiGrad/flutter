@@ -24,7 +24,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   auto_size_text: ^3.0.0
   shimmer: ^2.0.0
-
+  dotted_border: ^2.0.0+3
 
 
 dev_dependencies:

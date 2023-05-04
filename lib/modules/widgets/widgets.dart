@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kemet/core/colors.dart';
+import 'package:kemet/core/media_query_values.dart';
 
 Widget defaultTextFormField({
   initValue,
@@ -120,3 +121,20 @@ Widget defaultButton({
               ),
       ),
     );
+
+Widget PlaceInContext(context, String placeName, placeImag) {
+  return Row(
+    children: [
+      Image.network(
+        placeImag,
+        width: MediaQueryValues(context).width / 6,
+        height: MediaQueryValues(context).width / 6,
+        fit: BoxFit.cover,
+      ),
+      Padding(
+        padding: EdgeInsets.all(5),
+        child: Text(placeName),
+      ),
+    ],
+  );
+}
