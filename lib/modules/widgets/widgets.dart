@@ -5,6 +5,8 @@ import 'package:kemet/core/media_query_values.dart';
 Widget defaultTextFormField({
   initValue,
   required validator,
+  required textInputType,
+  required isPassword,
   function,
   required controller,
   required label,
@@ -30,25 +32,26 @@ Widget defaultTextFormField({
       ),
       border: Border.all(color: AppColors.black, width: 0.1),
     ),
-    child: TextFormField(
-      initialValue: initValue,
-      validator: validator,
-      onFieldSubmitted: (value) {},
-      controller: controller,
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        label: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextFormField(
+        obscureText: isPassword,
+        keyboardType:textInputType ,
+        initialValue: initValue,
+        validator: validator,
+        onFieldSubmitted: (value) {},
+        controller: controller,
+        decoration: InputDecoration(
+
+          border: InputBorder.none,
+          label: Row(
             children: [
               if (icon != null)
                 Icon(
                   icon,
                   color: iconColor,
                 ),
-              const SizedBox(
-                width: 10,
-              ),
+
               Text(
                 label,
                 style: TextStyle(
@@ -56,8 +59,8 @@ Widget defaultTextFormField({
               ),
             ],
           ),
+          hintText: hintText,
         ),
-        hintText: hintText,
       ),
     ),
   );

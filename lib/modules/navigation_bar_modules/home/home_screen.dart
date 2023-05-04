@@ -1,8 +1,11 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/helper/shimmer/card_shimmer.dart';
+import 'package:kemet/helper/shimmer/category_shimmer.dart';
 import 'package:kemet/modules/navigation_bar_modules/home/home_screen_cubit.dart';
 import 'package:kemet/modules/widgets/home_screen_widgets.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
@@ -13,7 +16,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeScreenCubit(),
+      create: (context) => HomeScreenCubit()
+        ..getCategory(context: context)
+        ..getPlaces(context: context)
+        ..getCities(context: context),
       child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -30,28 +36,53 @@ class HomeScreen extends StatelessWidget {
                       textWidget(context, AppStringsInArabic.whereWillYouGo,
                           25.0, AppColors.black),
                       defaultTextFormField(
-                          arabic: true,
-                          validator: (value) {
-                            myBloc.validateSearchResult(value);
-                          },
-                          controller: myBloc.searchController,
-                          label: AppStringsInArabic.search,
-                          labelColor: AppColors.hint,
-                          icon: Icons.search,
-                          iconColor: AppColors.hint),
+                        arabic: true,
+                        validator: (value) {
+                          myBloc.validateSearchResult(value);
+                        },
+                        controller: myBloc.searchController,
+                        label: AppStringsInArabic.search,
+                        labelColor: AppColors.hint,
+                        icon: Icons.search,
+                        iconColor: AppColors.hint,
+                        textInputType: TextInputType.text,
+                        isPassword: false,
+                      ),
 
                       ///TODO : Categories
-                      textWidget(context, AppStringsInArabic.categories, 18.0,
-                          AppColors.black),
-                      SizedBox(
-                        height: 50,
-                        child: Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 5,
-                            itemBuilder: (context, item) =>
-                                categoryWidget(context),
+                      textWidget(
+                        context,
+                        AppStringsInArabic.categories,
+                        18.0,
+                        AppColors.black,
+                      ),
+
+
+                      //TODO : Remove NOT !!!!!!!!!!!!!!!!!!!!!!!!!
+                      ConditionalBuilder(
+                        condition: state is !GetCategoryLoading,
+                        builder: (context) => SizedBox(
+                          height: 50,
+                          child: Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 3,
+                              itemBuilder: (context, item) =>
+                                  const CategoryShimmer(),
+                            ),
+                          ),
+                        ),
+                        fallback: (context) => SizedBox(
+                          height: 50,
+                          child: Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 5,
+                              itemBuilder: (context, item) =>
+                                  categoryWidget(context),
+                            ),
                           ),
                         ),
                       ),
@@ -60,27 +91,49 @@ class HomeScreen extends StatelessWidget {
                       textWidget(context, AppStringsInArabic.popularPlaces,
                           18.0, AppColors.black),
 
-                      GridView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 6,
-                        gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisExtent: MediaQueryValues(context).height*1/4,
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 20,
-                          crossAxisSpacing: MediaQueryValues(context).width*1/30,
+                      ConditionalBuilder(
+                        condition: state is !GetPlacesLoading,
+                        builder: (context) => GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 3,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent:
+                                MediaQueryValues(context).height * 1 / 4,
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing:
+                                MediaQueryValues(context).width * 1 / 30,
+                          ),
+                          itemBuilder: (context, item) {
+                            return const CardShimmer();
+                          },
                         ),
-                        itemBuilder: (context, item) {
-                          return cardOfPlace(context);
-                        },
+                        fallback: (context) => GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 6,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent:
+                                MediaQueryValues(context).height * 1 / 4,
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing:
+                                MediaQueryValues(context).width * 1 / 30,
+                          ),
+                          itemBuilder: (context, item) {
+                            return cardOfPlace(context);
+                          },
+                        ),
                       ),
 
                       ///TODO : Egypt
                       Row(
                         children: [
                           InkWell(
-                            onTap: (){
+                            onTap: () {
                               myBloc.goToEgyptGovernorates(context);
                             },
                             child: textWidget(
@@ -98,20 +151,43 @@ class HomeScreen extends StatelessWidget {
                               AppColors.black),
                         ],
                       ),
-                      GridView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 6,
-                        gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisExtent: MediaQueryValues(context).height*1/4,
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 20,
-                          crossAxisSpacing: MediaQueryValues(context).width*1/30,
+
+                      ConditionalBuilder(
+                        condition: state is !GetCitiesLoading,
+                        builder: (context) => GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 3,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent:
+                                MediaQueryValues(context).height * 1 / 4,
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing:
+                                MediaQueryValues(context).width * 1 / 30,
+                          ),
+                          itemBuilder: (context, item) {
+                            return const CardShimmer();
+                          },
                         ),
-                        itemBuilder: (context, item) {
-                          return cardOfGov(context);
-                        },
+                        fallback: (context) => GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 6,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent:
+                                MediaQueryValues(context).height * 1 / 4,
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing:
+                                MediaQueryValues(context).width * 1 / 30,
+                          ),
+                          itemBuilder: (context, item) {
+                            return cardOfGov(context);
+                          },
+                        ),
                       ),
                     ],
                   ),
