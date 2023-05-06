@@ -57,6 +57,7 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
           context: context, text: 'Signup successfully', clr: Colors.green);
       // print(value.data);
       userModel = UserModel.fromJson(value.data);
+      getToken(context, emailSignupController.text.trim(), passwordSignupController.text.trim(),);
       navigateToAndReplacement(context, const HomeScreenAndNavigationBar());
       // print(userModel!.name);
       // print(userModel!.username);
@@ -87,7 +88,7 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
       // print(value.data);
       userModel = UserModel.fromJson(value.data);
 
-      getToken(context);
+      getToken(context,emailLoginController.text.trim(),passwordLoginController.text.trim());
 
       navigateToAndReplacement(context, const HomeScreenAndNavigationBar());
       // print(userModel!.name);
@@ -104,13 +105,13 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
     });
   }
 
-  getToken(context) async {
+  getToken(context,email,password) async {
     emit(GetTokenLoading());
     await DioHelper.postData(
       url: AppEndPoints.token,
       data: {
-        'email': emailLoginController.text.trim(),
-        'password': passwordLoginController.text.trim(),
+        'email':email ,
+        'password':password ,
       },
     ).then((value) {
       // print(value.data);
