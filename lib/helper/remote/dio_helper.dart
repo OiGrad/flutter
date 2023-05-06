@@ -7,7 +7,8 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'http://ec2-100-25-70-197.compute-1.amazonaws.com/',
+        // baseUrl: 'http://ec2-100-25-70-197.compute-1.amazonaws.com/',
+        baseUrl: 'http://127.0.0.1:8000/',
         receiveDataWhenStatusError: true,
 
         /// If you want to handle the headers HERE"

@@ -18,3 +18,6 @@ class LoginLoading extends SignInAndSignUpState {}
 class LoginSuccess extends SignInAndSignUpState {}
 class LoginError extends SignInAndSignUpState {}
 
+class GetTokenLoading extends SignInAndSignUpState {}
+class GetTokenSuccess extends SignInAndSignUpState {}
+class GetTokenError extends SignInAndSignUpState {}

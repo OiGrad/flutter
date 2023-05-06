@@ -24,6 +24,10 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
   var passwordSignupController = TextEditingController();
   var phoneSignupController = TextEditingController();
 
+  late String token;
+
+  late String refresh;
+
   // bool loginSelected = false;
   toggleToLogin() {
     // loginSelected = true;
@@ -37,9 +41,8 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
 
   UserModel? userModel;
 
-  signUp(context) async{
+  signUp(context) async {
     emit(SignupWithEmailLoading());
-
 
     await DioHelper.postData(
       url: AppEndPoints.signUp,
@@ -67,8 +70,7 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
     });
   }
 
-
-  login(context) async{
+  login(context) async {
     emit(LoginLoading());
     await DioHelper.postData(
       url: AppEndPoints.login,
@@ -78,9 +80,14 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
       },
     ).then((value) {
       showSnackBar(
-          context: context, text: 'Login successfully', clr: Colors.green);
+        context: context,
+        text: 'Login successfully',
+        clr: Colors.green,
+      );
       // print(value.data);
       userModel = UserModel.fromJson(value.data);
+
+      getToken(context);
 
       navigateToAndReplacement(context, const HomeScreenAndNavigationBar());
       // print(userModel!.name);
@@ -89,8 +96,33 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
 
       emit(LoginSuccess());
     }).catchError((err) {
-      print(emailLoginController.text.trim());
-      print(passwordLoginController.text.trim());
+      // print(emailLoginController.text.trim());
+      // print(passwordLoginController.text.trim());
+      print(err.toString());
+      showSnackBar(context: context, text: 'Login Error', clr: Colors.red);
+      emit(LoginError());
+    });
+  }
+
+  getToken(context) async {
+    emit(GetTokenLoading());
+    await DioHelper.postData(
+      url: AppEndPoints.token,
+      data: {
+        'email': emailLoginController.text.trim(),
+        'password': passwordLoginController.text.trim(),
+      },
+    ).then((value) {
+      // print(value.data);
+      // print(userModel!.name);
+      // print(userModel!.username);
+      // print(userModel!.email);
+      token = value.data['access'];
+      refresh = value.data['refresh'];
+      print(refresh);
+      print(token);
+      emit(GetTokenSuccess());
+    }).catchError((err) {
       print(err.toString());
       showSnackBar(context: context, text: 'Login Error', clr: Colors.red);
       emit(LoginError());

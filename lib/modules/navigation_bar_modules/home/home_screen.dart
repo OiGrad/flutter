@@ -90,7 +90,6 @@ class HomeScreen extends StatelessWidget {
                       /// TODO : Popular
                       textWidget(context, AppStringsInArabic.popularPlaces,
                           18.0, AppColors.black),
-
                       ConditionalBuilder(
                         condition: state is !GetPlacesLoading,
                         builder: (context) => GridView.builder(
@@ -151,7 +150,6 @@ class HomeScreen extends StatelessWidget {
                               AppColors.black),
                         ],
                       ),
-
                       ConditionalBuilder(
                         condition: state is !GetCitiesLoading,
                         builder: (context) => GridView.builder(
