@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
 
                       //TODO : Remove NOT !!!!!!!!!!!!!!!!!!!!!!!!!
                       ConditionalBuilder(
-                        condition: state is !GetCategoryLoading,
+                        condition: state is GetCategoryLoading,
                         builder: (context) => SizedBox(
                           height: 50,
                           child: Directionality(
@@ -79,9 +79,9 @@ class HomeScreen extends StatelessWidget {
                             textDirection: TextDirection.rtl,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: 5,
+                              itemCount: myBloc.categories.length,
                               itemBuilder: (context, item) =>
-                                  categoryWidget(context),
+                                  categoryWidget(context,myBloc.categories[item]),
                             ),
                           ),
                         ),
