@@ -18,9 +18,9 @@ class HomeScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeScreenCubit()
         ..getCategory(context: context)
-        ..getPlaces(context: context)
-        ..getCities(context: context),
-      child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
+        // ..getPlaces(context: context)
+        // ..getCities(context: context),
+      ,child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
         listener: (context, state) {},
         builder: (context, state) {
           var myBloc = BlocProvider.of<HomeScreenCubit>(context);

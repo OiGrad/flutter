@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kemet/core/constants.dart';
 import 'package:kemet/core/navigation.dart';
 import 'package:kemet/helper/end_points.dart';
 import 'package:kemet/helper/remote/dio_helper.dart';
@@ -54,11 +55,18 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
       },
     ).then((value) {
       showSnackBar(
-          context: context, text: 'Signup successfully', clr: Colors.green);
+        context: context,
+        text: 'Signup successfully',
+        clr: Colors.green,
+      );
       // print(value.data);
       userModel = UserModel.fromJson(value.data);
-      getToken(context, emailSignupController.text.trim(), passwordSignupController.text.trim(),);
-      navigateToAndReplacement(context, const HomeScreenAndNavigationBar());
+      getToken(
+          context,
+          emailSignupController.text.trim(),
+          passwordSignupController.text.trim(),
+          true
+      );
       // print(userModel!.name);
       // print(userModel!.username);
       // print(userModel!.email);
@@ -73,6 +81,7 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
 
   login(context) async {
     emit(LoginLoading());
+
     await DioHelper.postData(
       url: AppEndPoints.login,
       data: {
@@ -88,7 +97,7 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
       // print(value.data);
       userModel = UserModel.fromJson(value.data);
 
-      getToken(context,emailLoginController.text.trim(),passwordLoginController.text.trim());
+
 
       navigateToAndReplacement(context, const HomeScreenAndNavigationBar());
       // print(userModel!.name);
@@ -105,13 +114,13 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
     });
   }
 
-  getToken(context,email,password) async {
+  getToken(context, email, password,bool isSignUp) async {
     emit(GetTokenLoading());
     await DioHelper.postData(
       url: AppEndPoints.token,
       data: {
-        'email':email ,
-        'password':password ,
+        'email': email,
+        'password': password,
       },
     ).then((value) {
       // print(value.data);
@@ -120,13 +129,17 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
       // print(userModel!.email);
       token = value.data['access'];
       refresh = value.data['refresh'];
+      AppConstants.token = token;
       print(refresh);
       print(token);
+      if(isSignUp == true){
+        navigateToAndReplacement(context, const HomeScreenAndNavigationBar());
+      }
       emit(GetTokenSuccess());
     }).catchError((err) {
       print(err.toString());
       showSnackBar(context: context, text: 'Login Error', clr: Colors.red);
-      emit(LoginError());
+      emit(GetTokenError());
     });
   }
 

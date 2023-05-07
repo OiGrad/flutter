@@ -1,7 +1,8 @@
 class AppEndPoints{
   // static const String baseUrl = 'http://www.kemeteg.live/';
   //192.168.137.133:8000/
-  static const String baseUrl = 'http://192.168.137.133:8000/';
+  //192.168.1.94:8080
+  static const String baseUrl = 'http://192.168.1.94:8080/';
 
 
   static const String signUp = '${baseUrl}users/signup/';

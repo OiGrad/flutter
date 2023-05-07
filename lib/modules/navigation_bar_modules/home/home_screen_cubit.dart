@@ -16,11 +16,11 @@ part 'home_screen_state.dart';
 class HomeScreenCubit extends Cubit<HomeScreenState> {
   HomeScreenCubit() : super(HomeScreenInitial());
 
-  List<PlaceCategory>? placesCategory;
+  List<PlaceCategory> categories = [];
 
-  List<Place>? placesList;
+  List<Place> placesList = [];
 
-  List<City>? citiesList;
+  List<City>? citiesList = [];
 
 
   void getCategory({required BuildContext context}) async{
@@ -30,10 +30,13 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       url: AppEndPoints.getCategory,
     ).then((value) {
       value.data['results'].forEach((e){
-        placesCategory!.add(PlaceCategory.fromJson(e));
+        categories.add(PlaceCategory.fromJson(e));
       });
+       print(categories);
       emit(GetCategorySuccess());
     }).catchError((err) {
+      print(err.toString());
+      print(err.toString());
       showSnackBar(context: context, text: 'Error in get Category', clr: Colors.red);
       emit(GetCategoryError());
     });

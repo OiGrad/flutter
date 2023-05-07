@@ -1,7 +1,7 @@
 class PlaceCategory {
-  int id;
-  String name;
-  String icon;
+  late int id;
+  late String name;
+  late String icon;
 
   PlaceCategory({
     required this.id,
@@ -11,7 +11,7 @@ class PlaceCategory {
 
   factory PlaceCategory.fromJson(Map<String, dynamic> json) {
     return PlaceCategory(
-      id: int.parse(json["id"]),
+      id: json["id"],
       name: json["name"],
       icon: json["icon"],
     );

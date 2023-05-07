@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:kemet/core/constants.dart';
 
 class DioHelper {
   static late Dio dio;
@@ -8,7 +9,7 @@ class DioHelper {
     dio = Dio(
       BaseOptions(
         // baseUrl: 'http://ec2-100-25-70-197.compute-1.amazonaws.com/',
-        baseUrl: 'http://127.0.0.1:8000/',
+        baseUrl: 'http://192.168.1.94:8080/',
         receiveDataWhenStatusError: true,
 
         /// If you want to handle the headers HERE"
@@ -22,6 +23,7 @@ class DioHelper {
 
   static Future<Response> getData(
       {required String url, Map<String, dynamic>? query, lang, token}) async {
+    dio.options.headers["Authorization"] = 'Bearer ${AppConstants.token}';
     return await dio.get(url, queryParameters: query);
   }
 
@@ -30,11 +32,11 @@ class DioHelper {
     return await dio.post(url, queryParameters: query, data: data);
   }
 
-  static Future<Response> putData({required String url,required data}) async {
-    return await dio.put(url,data: data);
+  static Future<Response> putData({required String url, required data}) async {
+    return await dio.put(url, data: data);
   }
 
-  static Future<Response> deleteData({required url,data})async{
-    return dio.delete(url,data: data);
+  static Future<Response> deleteData({required url, data}) async {
+    return dio.delete(url, data: data);
   }
 }
