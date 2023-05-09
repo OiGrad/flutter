@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppStringsInEnglish {
   static const String appName = 'Kemet App';
 
@@ -54,6 +56,16 @@ class AppStringsInEnglish {
   static const String reviews = 'Reviews';
 
   static const String famousPlaces = 'Famous Places';
+
+  static const String showReplaye = 'View Replays';
+  static const String hideReplaye = 'Hide Replays';
+  static const String commentInputLable = 'What do you think';
+  static const String commentsError = 'Error in Get Comments';
+  static const String showComments = 'View Comments';
+  static const String hideComments = 'Hide Comments';
+
+  static const String getPostError = 'Error in Get Post';
+  static const String oops = 'Oops';
 }
 
 class AppStringsInArabic {
@@ -77,4 +89,14 @@ class AppStringsInArabic {
   static const String reviews = 'آراء الزوار';
 
   static const String famousPlaces = 'أهم المواقع الاثرية';
+
+  static const String showReplaye = 'اظهر التعليقات';
+  static const String hideReplaye = 'إخفاء التعليقات';
+  static const String commentInputLable = 'انت ايه رأيك';
+  static const String commentsError = 'خطأ في التعليقات، حاول مجددا لاحقا!';
+  static const String showComments = 'إظهار التعليقات';
+  static const String hideComments = 'إخفاء التعليقات';
+
+  static const String getPostError = 'خطأ في طلب المنشورات';
+  static const String oops = 'حصل خير';
 }
