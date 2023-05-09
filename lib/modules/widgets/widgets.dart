@@ -7,7 +7,7 @@ Widget defaultTextFormField({
   required validator,
   required textInputType,
   required isPassword,
-  function,
+  Function? function,
   required controller,
   required label,
   labelColor,
@@ -15,8 +15,11 @@ Widget defaultTextFormField({
   hintText,
   icon,
   iconColor,
+  maxLines = 1,
+  Widget? iconButton,
 }) {
   return Container(
+    //height: 65,
     decoration: BoxDecoration(
       color: AppColors.white,
       boxShadow: [
@@ -33,34 +36,45 @@ Widget defaultTextFormField({
       border: Border.all(color: AppColors.black, width: 0.1),
     ),
     child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        obscureText: isPassword,
-        keyboardType:textInputType ,
-        initialValue: initValue,
-        validator: validator,
-        onFieldSubmitted: (value) {},
-        controller: controller,
-        decoration: InputDecoration(
-
-          border: InputBorder.none,
-          label: Row(
-            children: [
-              if (icon != null)
-                Icon(
-                  icon,
-                  color: iconColor,
+      padding: const EdgeInsetsDirectional.fromSTEB(5, 1, 5, 1),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextFormField(
+              obscureText: isPassword,
+              keyboardType: textInputType,
+              initialValue: initValue,
+              validator: validator,
+              maxLines: maxLines,
+              minLines: 1,
+              onFieldSubmitted: (value) {
+                function == null ? null : function(value);
+              },
+              controller: controller,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                label: Row(
+                  children: [
+                    if (icon != null)
+                      Icon(
+                        icon,
+                        color: iconColor,
+                      ),
+                    Text(
+                      label,
+                      style: TextStyle(
+                          color: labelColor == null
+                              ? AppColors.black
+                              : labelColor),
+                    ),
+                  ],
                 ),
-
-              Text(
-                label,
-                style: TextStyle(
-                    color: labelColor == null ? AppColors.black : labelColor),
+                hintText: hintText,
               ),
-            ],
+            ),
           ),
-          hintText: hintText,
-        ),
+          iconButton ?? const SizedBox(),
+        ],
       ),
     ),
   );
@@ -132,8 +146,120 @@ Widget PlaceInContext(context, String placeName, placeImag) {
         fit: BoxFit.cover,
       ),
       Padding(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Text(placeName),
+      ),
+    ],
+  );
+}
+
+class LikeButton extends StatefulWidget {
+  Function onTap;
+  int count;
+  bool isLiked;
+  LikeButton(
+      {required this.onTap,
+      required this.count,
+      this.isLiked = false,
+      super.key});
+
+  @override
+  State<LikeButton> createState() => _LikeButtonState(onTap, count, isLiked);
+}
+
+class _LikeButtonState extends State<LikeButton> {
+  Function onTap;
+  int count;
+  bool isLiked;
+  _LikeButtonState(this.onTap, this.count, this.isLiked);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        onTap();
+        //TODO: update the like button view.
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 30,
+            height: 30,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(5),
+                topLeft: Radius.circular(5),
+              ),
+              border: Border.all(
+                color: AppColors.primary,
+                width: 3,
+              ),
+            ),
+            child: Icon(
+              isLiked ? Icons.favorite : Icons.favorite_border,
+              color: AppColors.orange,
+            ),
+          ),
+          Container(
+            width: 30,
+            height: 30,
+            decoration: BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(5),
+                topRight: Radius.circular(5),
+              ),
+            ),
+            child: Text(
+              count.toString(),
+              style: TextStyle(color: AppColors.white),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+Widget commentsCounter(int count) {
+  return Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Container(
+        width: 25,
+        height: 25,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(5),
+            topLeft: Radius.circular(5),
+          ),
+          border: Border.all(
+            color: AppColors.primary,
+            width: 1,
+          ),
+        ),
+        child: Icon(
+          //size: 15,
+          Icons.mode_comment_outlined,
+          color: AppColors.orange,
+        ),
+      ),
+      Container(
+        width: 25,
+        height: 25,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: AppColors.primary,
+          borderRadius: const BorderRadius.only(
+            bottomRight: Radius.circular(5),
+            topRight: Radius.circular(5),
+          ),
+        ),
+        child: Text(
+          count.toString(),
+          style: TextStyle(color: AppColors.white),
+        ),
       ),
     ],
   );
