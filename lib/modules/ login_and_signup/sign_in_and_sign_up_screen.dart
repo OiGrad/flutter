@@ -6,7 +6,7 @@ import 'package:kemet/core/strings.dart';
 import 'package:kemet/core/constants.dart';
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_cubit.dart';
 import 'package:kemet/modules/widgets/sign_page_widgets.dart';
-import 'package:kemet/modules/widgets/snackbar_widget.dart';
+
 import 'package:kemet/modules/widgets/widgets.dart';
 
 class SignPage extends StatefulWidget {
@@ -184,6 +184,12 @@ class _SignPageState extends State<SignPage> {
                               // login logic
                               // TODO : Handle Shared Prefernce
                               function: () {
+                                myBloc.getToken(
+                                  context,
+                                  myBloc.emailLoginController.text.trim(),
+                                  myBloc.passwordLoginController.text.trim(),
+                                  false
+                                );
                                 myBloc.login(context);
                               },
                               context: context,
@@ -202,6 +208,7 @@ class _SignPageState extends State<SignPage> {
                               // TODO : Handle Shared Prefernce
                               function: () {
                                 myBloc.signUp(context);
+
                               },
                               context: context,
                               color: AppColors.primary,

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/colors.dart';
+import 'package:kemet/core/constants.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/helper/end_points.dart';
+import 'package:kemet/models/place_category.dart';
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_cubit.dart';
 
 import '../../core/navigation.dart';
@@ -106,7 +109,7 @@ Widget textWidget(context, text, size, textColor) {
   );
 }
 
-Widget categoryWidget(context) {
+Widget categoryWidget(context,PlaceCategory placeCategory) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
@@ -129,11 +132,11 @@ Widget categoryWidget(context) {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Image.asset('assets/images/category1.png'),
+            Image.network('${AppEndPoints.baseUrl}${placeCategory.icon}'),
             const Spacer(),
-            const Text(
-              'أماكن أثرية',
-              style: TextStyle(fontFamily: 'Tajawal'),
+            Text(
+              placeCategory.name,
+              style: const TextStyle(fontFamily: 'Tajawal'),
             ),
             const Spacer(),
           ],

@@ -18,9 +18,9 @@ class HomeScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeScreenCubit()
         ..getCategory(context: context)
-        ..getPlaces(context: context)
-        ..getCities(context: context),
-      child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
+        // ..getPlaces(context: context)
+        // ..getCities(context: context),
+      ,child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
         listener: (context, state) {},
         builder: (context, state) {
           var myBloc = BlocProvider.of<HomeScreenCubit>(context);
@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
 
                       //TODO : Remove NOT !!!!!!!!!!!!!!!!!!!!!!!!!
                       ConditionalBuilder(
-                        condition: state is !GetCategoryLoading,
+                        condition: state is GetCategoryLoading,
                         builder: (context) => SizedBox(
                           height: 50,
                           child: Directionality(
@@ -79,9 +79,9 @@ class HomeScreen extends StatelessWidget {
                             textDirection: TextDirection.rtl,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: 5,
+                              itemCount: myBloc.categories.length,
                               itemBuilder: (context, item) =>
-                                  categoryWidget(context),
+                                  categoryWidget(context,myBloc.categories[item]),
                             ),
                           ),
                         ),
@@ -90,7 +90,6 @@ class HomeScreen extends StatelessWidget {
                       /// TODO : Popular
                       textWidget(context, AppStringsInArabic.popularPlaces,
                           18.0, AppColors.black),
-
                       ConditionalBuilder(
                         condition: state is !GetPlacesLoading,
                         builder: (context) => GridView.builder(
@@ -151,7 +150,6 @@ class HomeScreen extends StatelessWidget {
                               AppColors.black),
                         ],
                       ),
-
                       ConditionalBuilder(
                         condition: state is !GetCitiesLoading,
                         builder: (context) => GridView.builder(
