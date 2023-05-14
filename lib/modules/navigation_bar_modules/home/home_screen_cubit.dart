@@ -20,7 +20,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
   List<Place> placesList = [];
 
-  List<City>? citiesList = [];
+  List<City> citiesList = [];
 
 
   void getCategory({required BuildContext context}) async{
@@ -49,10 +49,11 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       url: AppEndPoints.getPlaces,
     ).then((value) {
       value.data['results'].forEach((e){
-        placesList!.add(Place.fromJson(e));
+        placesList.add(Place.fromJson(e));
       });
       emit(GetPlacesSuccess());
     }).catchError((err) {
+      print(err.toString());
       showSnackBar(context: context, text: 'Error in get Places', clr: Colors.red);
       emit(GetPlacesError());
     });
@@ -66,12 +67,14 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       url: AppEndPoints.getCities,
     ).then((value) {
       value.data['results'].forEach((e){
-        citiesList!.add(City.fromJson(e));
+        citiesList.add(City.fromJson(e));
       });
+      print(citiesList);
       emit(GetCitiesSuccess());
     }).catchError((err) {
+      print(err.toString());
       showSnackBar(context: context, text: 'Error in get Cities', clr: Colors.red);
-      emit(GetCategoryError());
+      emit(GetCitiesError());
     });
   }
 

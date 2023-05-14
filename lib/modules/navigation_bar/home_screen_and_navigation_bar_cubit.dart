@@ -3,6 +3,7 @@ import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:kemet/modules/navigation_bar_modules/favorites/favorites_screen.dart';
 import 'package:kemet/modules/navigation_bar_modules/home/home_screen.dart';
 import 'package:kemet/modules/navigation_bar_modules/posts/posts_screen.dart';
+import 'package:kemet/modules/navigation_bar_modules/travel_assistant/travel_assistant_screen.dart';
 import 'package:kemet/modules/navigation_bar_modules/user/user_screen.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
@@ -26,18 +27,19 @@ class HomeScreenAndNavigationBarCubit
 
 
   // TODO : Handle Icons
-  List<BottomNavigationBarItem> bottomNavigationBarItems = const [
-    BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-    BottomNavigationBarItem(
-        icon: Icon(Icons.bookmark_added_outlined), label: 'favorites'),
-    BottomNavigationBarItem(icon: Icon(Icons.comment), label: 'posts'),
-    BottomNavigationBarItem(icon: Icon(Icons.person), label: 'user')
+  List<BottomNavigationBarItem> bottomNavigationBarItems = [
+    const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
+    const BottomNavigationBarItem(icon: Icon(Icons.bookmark_added_outlined), label: 'favorites'),
+    BottomNavigationBarItem(icon: Image.asset('assets/images/ai_icon.png',color: Colors.white,), label: 'Travel Assistant'),
+    const BottomNavigationBarItem(icon: Icon(Icons.comment), label: 'posts'),
+    const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'user')
   ];
 
   List screensOfNavBar = const [
     HomeScreen(),
     FavoritesScreen(),
-    PostsScreen(),
+    TravelAssistantView(),
+    UserScreen(),
     UserScreen(),
   ];
 

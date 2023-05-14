@@ -54,6 +54,7 @@ class AppStringsInEnglish {
   static const String directions = 'Directions';
   static const String gallery = 'Gallery';
   static const String reviews = 'Reviews';
+  static const String bot = 'Travel Assistant Bot';
 
   static const String famousPlaces = 'Famous Places';
 

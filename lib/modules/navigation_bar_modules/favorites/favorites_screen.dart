@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/helper/shimmer/card_shimmer.dart';
 import 'package:kemet/modules/widgets/home_screen_widgets.dart';
 import 'package:kemet/core/media_query_values.dart';
 
@@ -32,7 +33,8 @@ class FavoritesScreen extends StatelessWidget {
                     crossAxisSpacing: MediaQueryValues(context).width*1/30,
                   ),
                   itemBuilder: (context, item) {
-                    return cardOfPlace(context);
+                    // return cardOfPlace(context);
+                    return CardShimmer();
                   },
                 ),
               ],

@@ -2,17 +2,17 @@ import 'package:kemet/models/city.dart';
 import 'package:kemet/models/place_category.dart';
 
 class Place {
-  int id;
+  var id;
   City city;
   PlaceCategory category;
 
   List<dynamic> gallery;
-  String main_Image;
-  String name;
-  int price;
+  var main_Image;
+  var name;
+  var price;
   var rate;
-  String info;
-  String location_text;
+  var info;
+  var location_text;
 
   // Location location;
 
@@ -31,13 +31,13 @@ class Place {
 
   factory Place.fromJson(Map<String, dynamic> json) {
     return Place(
-      id: int.parse(json["id"]),
+      id: json["id"],
       city: City.fromJson(json["city"]),
       category: PlaceCategory.fromJson(json["category"]),
       gallery: List.of(json["gallery"]).map((i) => json["gallery"]).toList(),
       main_Image: json["main_Image"],
       name: json["name"],
-      price: int.parse(json["price"]),
+      price:json["price"],
       rate: json["rate"],
       info: json["info"],
       location_text: json["location_text"],

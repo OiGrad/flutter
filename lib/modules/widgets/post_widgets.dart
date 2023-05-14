@@ -10,6 +10,7 @@ import 'package:kemet/models/place_hint.dart';
 import 'package:kemet/models/post_model.dart';
 import 'package:kemet/modules/comments/comments_component.dart';
 import 'package:kemet/modules/widgets/snackbar_widget.dart';
+import 'package:kemet/models/place_model.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:timeago/timeago.dart' as timeago;

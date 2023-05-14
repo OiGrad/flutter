@@ -1,11 +1,11 @@
 class City {
-  int id;
-  String name;
-  String nick_name;
-  String main_Image;
-  String area;
-  String info;
-  String location_text;
+  var id;
+  var name;
+  var nick_name;
+  var main_Image;
+  var area;
+  var info;
+  var location_text;
 
 // Location location;
 
@@ -21,7 +21,7 @@ class City {
 
   factory City.fromJson(Map<String, dynamic> json) {
     return City(
-      id: int.parse(json["id"]),
+      id: json["id"],
       name: json["name"],
       nick_name: json["nick_name"],
       main_Image: json["main_Image"],

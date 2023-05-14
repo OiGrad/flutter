@@ -4,6 +4,7 @@ import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/navigation.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/models/place_model.dart';
 import 'package:kemet/modules/directions/place_directions/place_directions_screen.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
 
@@ -27,21 +28,23 @@ List<String> imags = [
 ];
 
 class PlaceView extends StatelessWidget {
-  const PlaceView({super.key});
+  PlaceView({super.key, required this.place});
+  Place place;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: detailedScreenDraft(
         context,
-        title: title,
+        title: place.name,
         headCardItem: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(3, 3, 3, 3),
               child: RatingBar.builder(
-                initialRating: placeRating,
+                ignoreGestures: true,
+                initialRating: place.rate,
                 minRating: 1,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
@@ -51,10 +54,7 @@ class PlaceView extends StatelessWidget {
                 itemBuilder: (context, _) => const Icon(
                   Icons.star,
                   color: Colors.amber,
-                ),
-                onRatingUpdate: (rating) {
-                  print(rating);
-                },
+                ), onRatingUpdate: (double value) {},
               ),
             ),
             Text("${placeRating.toString()}/5"),
@@ -75,10 +75,10 @@ class PlaceView extends StatelessWidget {
               children: [
                 //TODO:add the correct icons
                 Icon(Icons.pause_circle),
-                Text(fees),
+                Text(place.price),
 
                 Icon(Icons.pause_circle),
-                Text(shortDiscryption),
+                Text(place.name),
               ],
             ),
           ),
@@ -108,6 +108,7 @@ class PlaceView extends StatelessWidget {
                 Icons.star,
                 color: Colors.amber,
               ),
+              // TODO : send the rating
               onRatingUpdate: (rating) {
                 print(rating);
               },
@@ -119,6 +120,7 @@ class PlaceView extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.4,
             text: AppStringsInArabic.save,
             color: const Color.fromARGB(255, 228, 164, 37),
+            // TODO : send the rating
             function: () {},
             context: context,
           ),
@@ -127,17 +129,17 @@ class PlaceView extends StatelessWidget {
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
             child: Text(
-              briefHistory,
+              place.info,
               textAlign: TextAlign.end,
             ),
           ),
           headNote(context, text: AppStringsInArabic.location),
           Text(
-            location,
+            place.location_text,
           ),
-          Text(
-            NMS,
-          ),
+          // Text(
+          //   NMS,
+          // ),
           const SizedBox(height: 5),
           defaultButton(
             r: 5,
@@ -145,6 +147,7 @@ class PlaceView extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.4,
             text: AppStringsInArabic.directions,
             color: const Color.fromARGB(255, 228, 164, 37),
+            //TODO : HELP !!!!!!!!!!!!!
             function: () {
               navigateTo(context,
                   PlaceDirections(title: title, placeRating: placeRating));
@@ -160,7 +163,7 @@ class PlaceView extends StatelessWidget {
             child: SizedBox(
               height: 160,
               child: ListView.builder(
-                itemCount: imags.length,
+                itemCount: place.gallery.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Padding(
@@ -173,7 +176,7 @@ class PlaceView extends StatelessWidget {
                         border: Border.all(color: AppColors.orange),
                       ),
                       child: Image.asset(
-                        imags[index],
+                        place.gallery[index],
                         width: 120,
                         height: 150,
                         fit: BoxFit.cover,
