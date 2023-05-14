@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/colors.dart';
-import 'package:kemet/core/constants.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/strings.dart';
 import 'package:kemet/helper/end_points.dart';
+import 'package:kemet/models/city.dart';
 import 'package:kemet/models/place_category.dart';
+import 'package:kemet/models/place_model.dart';
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_cubit.dart';
 
 import '../../core/navigation.dart';
@@ -146,10 +147,10 @@ Widget categoryWidget(context,PlaceCategory placeCategory) {
   );
 }
 
-Widget cardOfPlace(context) {
+Widget cardOfPlace(context,Place place) {
   return InkWell(
     onTap: () {
-      navigateTo(context, PlaceView());
+      navigateTo(context, PlaceView(place: place,));
     },
     child: Container(
       decoration: BoxDecoration(
@@ -171,16 +172,16 @@ Widget cardOfPlace(context) {
         children: [
           Container(
             height: MediaQueryValues(context).height * 2 / 14,
-            child: Image.asset('assets/images/test.png'),
+            child: Image.network('${AppEndPoints.baseUrl}${place.main_Image}'),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Text(
-                  'الكنيسة المعلقة',
-                  style: TextStyle(
+                Text(
+                  place.name,
+                  style: const TextStyle(
                       fontFamily: 'Tajawal', fontWeight: FontWeight.bold),
                 ),
                 Row(
@@ -192,8 +193,8 @@ Widget cardOfPlace(context) {
                       child: Icon(Icons.favorite,
                           size: 15, color: AppColors.white),
                     ),
-                    const Text(
-                      'مبني أثري',
+                    Text(
+                      place.city.name,
                       style: TextStyle(fontFamily: 'Tajawal'),
                     ),
                   ],
@@ -207,7 +208,7 @@ Widget cardOfPlace(context) {
   );
 }
 
-Widget cardOfGov(context) {
+Widget cardOfGov(context ,City city) {
   return InkWell(
     onTap: () {
       navigateTo(context, CityView());
@@ -231,16 +232,16 @@ Widget cardOfGov(context) {
         children: [
           Container(
             height: MediaQueryValues(context).height * 2 / 14,
-            child: Image.asset('assets/images/cairo.png'),
+            child: Image.network('${AppEndPoints.baseUrl}${city.main_Image}',fit: BoxFit.cover,),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Text(
-                  'القاهره',
-                  style: TextStyle(
+                Text(
+                  city.name,
+                  style: const TextStyle(
                       fontFamily: 'Tajawal', fontWeight: FontWeight.bold),
                 ),
                 Row(
@@ -252,9 +253,9 @@ Widget cardOfGov(context) {
                           size: 15, color: AppColors.white),
                     ),
                     const Spacer(),
-                    const Text(
-                      'العاصمه',
-                      style: TextStyle(fontFamily: 'Tajawal'),
+                    Text(
+                      city.nick_name,
+                      style: const TextStyle(fontFamily: 'Tajawal'),
                     ),
                   ],
                 ),

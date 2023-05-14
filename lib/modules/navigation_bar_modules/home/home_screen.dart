@@ -18,9 +18,9 @@ class HomeScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeScreenCubit()
         ..getCategory(context: context)
-        // ..getPlaces(context: context)
-        // ..getCities(context: context),
-      ,child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
+        ..getPlaces(context: context)
+        ..getCities(context: context),
+      child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
         listener: (context, state) {},
         builder: (context, state) {
           var myBloc = BlocProvider.of<HomeScreenCubit>(context);
@@ -57,8 +57,6 @@ class HomeScreen extends StatelessWidget {
                         AppColors.black,
                       ),
 
-
-                      //TODO : Remove NOT !!!!!!!!!!!!!!!!!!!!!!!!!
                       ConditionalBuilder(
                         condition: state is GetCategoryLoading,
                         builder: (context) => SizedBox(
@@ -80,8 +78,8 @@ class HomeScreen extends StatelessWidget {
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: myBloc.categories.length,
-                              itemBuilder: (context, item) =>
-                                  categoryWidget(context,myBloc.categories[item]),
+                              itemBuilder: (context, item) => categoryWidget(
+                                  context, myBloc.categories[item]),
                             ),
                           ),
                         ),
@@ -91,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                       textWidget(context, AppStringsInArabic.popularPlaces,
                           18.0, AppColors.black),
                       ConditionalBuilder(
-                        condition: state is !GetPlacesLoading,
+                        condition: state is GetPlacesLoading,
                         builder: (context) => GridView.builder(
                           physics: const BouncingScrollPhysics(),
                           shrinkWrap: true,
@@ -112,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                         fallback: (context) => GridView.builder(
                           physics: const BouncingScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: 6,
+                          itemCount: myBloc.placesList.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             mainAxisExtent:
@@ -123,7 +121,7 @@ class HomeScreen extends StatelessWidget {
                                 MediaQueryValues(context).width * 1 / 30,
                           ),
                           itemBuilder: (context, item) {
-                            return cardOfPlace(context);
+                            return cardOfPlace(context,myBloc.placesList[0]);
                           },
                         ),
                       ),
@@ -151,7 +149,7 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                       ConditionalBuilder(
-                        condition: state is !GetCitiesLoading,
+                        condition: state is GetCitiesLoading,
                         builder: (context) => GridView.builder(
                           physics: const BouncingScrollPhysics(),
                           shrinkWrap: true,
@@ -172,7 +170,7 @@ class HomeScreen extends StatelessWidget {
                         fallback: (context) => GridView.builder(
                           physics: const BouncingScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: 6,
+                          itemCount: myBloc.citiesList.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             mainAxisExtent:
@@ -183,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                                 MediaQueryValues(context).width * 1 / 30,
                           ),
                           itemBuilder: (context, item) {
-                            return cardOfGov(context);
+                            return cardOfGov(context,myBloc.citiesList[item]);
                           },
                         ),
                       ),

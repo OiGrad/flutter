@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/helper/shimmer/card_shimmer.dart';
 import 'package:kemet/modules/place_details/place_details_screen.dart';
 import 'package:kemet/modules/widgets/home_screen_widgets.dart';
 import 'package:kemet/modules/widgets/place_details.dart';
@@ -65,7 +66,7 @@ class CityView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-                  child: cardOfPlace(context),
+                  child: CardShimmer(),
                 );
               },
             ),

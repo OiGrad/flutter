@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kemet/core/media_query_values.dart';
-import 'package:kemet/data/place.dart';
+import 'package:kemet/models/place_model.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
 import 'package:dotted_border/dotted_border.dart';
 
@@ -35,7 +35,7 @@ Widget post(BuildContext context, Place place, text) {
     width: double.infinity,
     child: Column(
       children: [
-        postHeader(place.image, 'userName', 'postedAt'),
+        postHeader(place.main_Image, 'userName', 'postedAt'),
         postPlaceCard(context, place, text)
       ],
     ),

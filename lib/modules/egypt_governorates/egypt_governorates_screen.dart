@@ -27,7 +27,7 @@ class EgyptGovernoratesScreen extends StatelessWidget {
             crossAxisSpacing: 20,
           ),
           itemBuilder: (context, item) {
-            return cardOfGov(context);
+            return Container();
           },
         ),
       ),
