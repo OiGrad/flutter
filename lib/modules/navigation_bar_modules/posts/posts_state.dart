@@ -10,3 +10,5 @@ class GetPostsLoading extends PostsState {}
 class GetPostsSuccess extends PostsState {}
 
 class GetPostsError extends PostsState {}
+
+class GoingToCreatePostScreenSuccess extends PostsState {}

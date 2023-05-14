@@ -66,6 +66,16 @@ class AppStringsInEnglish {
 
   static const String getPostError = 'Error in Get Post';
   static const String oops = 'Oops';
+  static const String addPostLable = "What's on your mind?";
+  static const String share = 'Share';
+
+  static const String tellUsYourStory = 'Tell us your story';
+  static const String addPicture = 'Add Picture';
+  static const String addPlace = 'Add Place';
+  static const String commentThePlace = 'Comment the place?';
+  static const String postTailHint = 'What else?';
+  static const String postPublished = 'Post Published successfully';
+  static const String errorPublishingPost = 'Error in Post Publishing';
 }
 
 class AppStringsInArabic {
@@ -99,4 +109,13 @@ class AppStringsInArabic {
 
   static const String getPostError = 'خطأ في طلب المنشورات';
   static const String oops = 'حصل خير';
+  static const String addPostLable = "في دماغك ايه؟";
+  static const String share = 'نشر';
+  static const String tellUsYourStory = 'قول تجربتك';
+  static const String addPicture = 'إضافة صورة';
+  static const String addPlace = 'إضافة مكان';
+  static const String commentThePlace = 'تقول ايه عن المكان؟';
+  static const String postTailHint = 'اضف المزيد';
+  static const String postPublished = 'تم النشر بنجاح';
+  static const String errorPublishingPost = 'خطأ في النشر';
 }

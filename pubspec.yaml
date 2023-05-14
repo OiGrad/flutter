@@ -26,6 +26,7 @@ dependencies:
   shimmer: ^2.0.0
   dotted_border: ^2.0.0+3
   timeago: ^3.4.0
+  font_awesome_flutter: ^10.4.0
 
 
 dev_dependencies:

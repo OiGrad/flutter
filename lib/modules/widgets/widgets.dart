@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
+import 'package:kemet/models/place_hint.dart';
 
 Widget defaultTextFormField({
   initValue,
@@ -16,10 +17,9 @@ Widget defaultTextFormField({
   icon,
   iconColor,
   maxLines = 1,
-  Widget? iconButton,
+  Widget? iconWidget,
 }) {
   return Container(
-    //height: 65,
     decoration: BoxDecoration(
       color: AppColors.white,
       boxShadow: [
@@ -73,7 +73,7 @@ Widget defaultTextFormField({
               ),
             ),
           ),
-          iconButton ?? const SizedBox(),
+          iconWidget ?? const SizedBox(),
         ],
       ),
     ),
@@ -136,18 +136,18 @@ Widget defaultButton({
       ),
     );
 
-Widget PlaceInContext(context, String placeName, placeImag) {
+Widget PlaceInContext(context, PlaceHint placeHint) {
   return Row(
     children: [
-      Image.network(
-        placeImag,
+      Image.asset(
+        placeHint.image,
         width: MediaQueryValues(context).width / 6,
         height: MediaQueryValues(context).width / 6,
         fit: BoxFit.cover,
       ),
       Padding(
         padding: const EdgeInsets.all(5),
-        child: Text(placeName),
+        child: Text(placeHint.name),
       ),
     ],
   );
@@ -222,7 +222,7 @@ class _LikeButtonState extends State<LikeButton> {
   }
 }
 
-Widget commentsCounter(int count) {
+Widget commentsCounter(String count) {
   return Row(
     mainAxisSize: MainAxisSize.min,
     children: [
@@ -257,7 +257,7 @@ Widget commentsCounter(int count) {
           ),
         ),
         child: Text(
-          count.toString(),
+          count,
           style: TextStyle(color: AppColors.white),
         ),
       ),

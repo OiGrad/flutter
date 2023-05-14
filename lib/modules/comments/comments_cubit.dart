@@ -15,6 +15,28 @@ class CommentsCubit extends Cubit<CommentsState> {
 
   List<Comment> commentsList = [];
 
+  void saveComment(context, text, parentType, parentId) {
+    emit(PostCommentsLoading());
+    DioHelper.postData(
+      url: AppEndPoints.postComment,
+      data: {'text': text, 'parent_type': parentType, 'parent_id': parentId},
+    ).then((value) {
+      showSnackBar(
+        context: context,
+        text: 'Comment Saved',
+        clr: AppColors.green,
+      );
+      emit(PostCommentsSuccess());
+    }).catchError((e) {
+      showSnackBar(
+        context: context,
+        text: 'Save Comment Error',
+        clr: AppColors.error,
+      );
+      emit(PostCommentsError());
+    });
+  }
+
   void getComments(context, parentId, parentType) async {
     emit(GetCommentsLoading());
 
@@ -29,7 +51,7 @@ class CommentsCubit extends Cubit<CommentsState> {
       emit(GetCommentsError());
       showSnackBar(
           context: context,
-          text: AppStringsInEnglish.commentsError,
+          text: err.toString(), //AppStringsInEnglish.commentsError,
           clr: AppColors.error);
     });
   }

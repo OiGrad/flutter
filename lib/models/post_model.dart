@@ -1,24 +1,29 @@
+import 'dart:convert';
+
 class Post {
   int id;
   var postedAt;
   String userName;
-  int commentsCount;
+  String commentsCount;
+  List content;
   //TODO: add postContent
-  Post(
-      {required this.id,
-      required this.userName,
-      required this.postedAt,
-      required this.commentsCount});
+  Post({
+    required this.id,
+    required this.userName,
+    required this.postedAt,
+    required this.commentsCount,
+    required this.content,
+  });
 
-  factory Post.fromJson(Map<String, dynamic> json) {
+  factory Post.fromJson(Map<String, dynamic> _json) {
     return Post(
-      id: json['id'],
-      userName: json['userName'],
-      postedAt: json['postedAt'],
-      commentsCount: json['commentsCount'],
+      id: _json['id'],
+      userName: _json['user']['username'],
+      postedAt: _json['created_at'],
+      commentsCount: '?', //json['commentsCount'] as String
+      content: json.decode(_json['body'].toString().replaceAll("'", '"')),
     );
   }
-
   toJson() {
     return {
       'id': id,

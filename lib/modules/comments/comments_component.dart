@@ -42,18 +42,30 @@ class CommentSection extends StatelessWidget {
               label: AppStringsInEnglish.commentInputLable,
               arabic: true,
               maxLines: 3,
-              iconButton: IconButton(
-                onPressed: () {
-                  //TODO: save the comment and reload comments
+              iconWidget: BlocConsumer<CommentsCubit, CommentsState>(
+                listener: (context, state) {},
+                builder: (context, state) {
+                  var myBloc = BlocProvider.of<CommentsCubit>(context);
+                  return IconButton(
+                    onPressed: () {
+                      myBloc.saveComment(
+                        context,
+                        controller.text,
+                        parentType,
+                        parentId,
+                      );
+                    },
+                    icon: Icon(
+                      Icons.send_rounded,
+                      color: AppColors.primary,
+                    ),
+                  );
                 },
-                icon: Icon(
-                  Icons.send_rounded,
-                  color: AppColors.primary,
-                ),
               ),
             ),
           ),
-          BlocBuilder<CommentsCubit, CommentsState>(
+          BlocConsumer<CommentsCubit, CommentsState>(
+            listener: (context, state) {},
             builder: (context, state) {
               var myBloc = BlocProvider.of<CommentsCubit>(context);
               if (state is GetCommentsLoading) {
