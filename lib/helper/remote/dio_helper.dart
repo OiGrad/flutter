@@ -9,7 +9,8 @@ class DioHelper {
     dio = Dio(
       BaseOptions(
         // baseUrl: 'http://ec2-100-25-70-197.compute-1.amazonaws.com/',
-        baseUrl: 'https://58e9-197-36-209-110.ngrok-free.app/',
+        baseUrl: 'http://192.168.1.5:8000/',
+        //baseUrl: 'https://58e9-197-36-209-110.ngrok-free.app/',
         receiveDataWhenStatusError: true,
 
         /// If you want to handle the headers HERE"
@@ -22,9 +23,17 @@ class DioHelper {
   }
 
   static Future<Response> getData(
-      {required String url, Map<String, dynamic>? query, lang, token}) async {
+      {required String url,
+      Map<String, dynamic>? query,
+      lang,
+      token,
+      onreceivProgres = null}) async {
     dio.options.headers["Authorization"] = 'Bearer ${AppConstants.token}';
-    return await dio.get(url, queryParameters: query);
+    if (onreceivProgres == null) {
+      onreceivProgres = (int a, int b) {};
+    }
+    return await dio.get(url,
+        queryParameters: query, onReceiveProgress: onreceivProgres);
   }
 
   static Future<Response> postData(

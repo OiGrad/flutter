@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppStringsInEnglish {
   static const String appName = 'Kemet App';
 
@@ -55,6 +57,26 @@ class AppStringsInEnglish {
   static const String bot = 'Travel Assistant Bot';
 
   static const String famousPlaces = 'Famous Places';
+
+  static const String showReplaye = 'View Replays';
+  static const String hideReplaye = 'Hide Replays';
+  static const String commentInputLable = 'What do you think';
+  static const String commentsError = 'Error in Get Comments';
+  static const String showComments = 'View Comments';
+  static const String hideComments = 'Hide Comments';
+
+  static const String getPostError = 'Error in Get Post';
+  static const String oops = 'Oops';
+  static const String addPostLable = "What's on your mind?";
+  static const String share = 'Share';
+
+  static const String tellUsYourStory = 'Tell us your story';
+  static const String addPicture = 'Add Picture';
+  static const String addPlace = 'Add Place';
+  static const String commentThePlace = 'Comment the place?';
+  static const String postTailHint = 'What else?';
+  static const String postPublished = 'Post Published successfully';
+  static const String errorPublishingPost = 'Error in Post Publishing';
 }
 
 class AppStringsInArabic {
@@ -79,4 +101,22 @@ class AppStringsInArabic {
 
   static const String famousPlaces = 'أهم المواقع الاثرية';
 
+  static const String showReplaye = 'اظهر التعليقات';
+  static const String hideReplaye = 'إخفاء التعليقات';
+  static const String commentInputLable = 'انت ايه رأيك';
+  static const String commentsError = 'خطأ في التعليقات، حاول مجددا لاحقا!';
+  static const String showComments = 'إظهار التعليقات';
+  static const String hideComments = 'إخفاء التعليقات';
+
+  static const String getPostError = 'خطأ في طلب المنشورات';
+  static const String oops = 'حصل خير';
+  static const String addPostLable = "في دماغك ايه؟";
+  static const String share = 'نشر';
+  static const String tellUsYourStory = 'قول تجربتك';
+  static const String addPicture = 'إضافة صورة';
+  static const String addPlace = 'إضافة مكان';
+  static const String commentThePlace = 'تقول ايه عن المكان؟';
+  static const String postTailHint = 'اضف المزيد';
+  static const String postPublished = 'تم النشر بنجاح';
+  static const String errorPublishingPost = 'خطأ في النشر';
 }

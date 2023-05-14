@@ -4,21 +4,29 @@ import 'package:kemet/core/strings.dart';
 import 'package:kemet/core/themes.dart';
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_cubit.dart';
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_screen.dart';
+import 'package:kemet/modules/create_post/create_post_cubit.dart';
+import 'package:kemet/modules/navigation_bar_modules/posts/posts_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (ctx)=>SignInAndSignUpCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => SignInAndSignUpCubit()),
+        BlocProvider(create: (context) => PostsCubit()),
+        BlocProvider(
+            create: (context) => CreatePostCubit()
+              ..addText(context, hint: AppStringsInEnglish.addPostLable)),
+      ],
       child: MaterialApp(
-        debugShowCheckedModeBanner:false ,
+        debugShowCheckedModeBanner: false,
         title: AppStringsInEnglish.appName,
         theme: appLightTheme(),
-        darkTheme:appDarkTheme(),
+        darkTheme: appDarkTheme(),
         //TODO:Handle the start point
-        home:const SignPage(),
+        home: const SignPage(),
       ),
     );
   }
