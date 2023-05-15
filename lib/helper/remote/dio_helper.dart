@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:kemet/core/constants.dart';
+import 'package:kemet/helper/end_points.dart';
 
 class DioHelper {
   static late Dio dio;
@@ -8,9 +9,7 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-        // baseUrl: 'http://ec2-100-25-70-197.compute-1.amazonaws.com/',
-        baseUrl: 'http://192.168.1.5:8000/',
-        //baseUrl: 'https://58e9-197-36-209-110.ngrok-free.app/',
+        baseUrl: AppEndPoints.baseUrl,
         receiveDataWhenStatusError: true,
 
         /// If you want to handle the headers HERE"
