@@ -13,4 +13,5 @@ class AppColors {
   static Color black = Colors.black;
   static Color blackWithOpacity = const Color(0xFF252525);
   static Color green = Colors.green;
+  static Color transport = const Color.fromARGB(255, 200, 69, 21);
 }
