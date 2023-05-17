@@ -18,11 +18,11 @@ Widget detailedScreenDraft(
         children: [
           Align(
             alignment: const AlignmentDirectional(0, 0),
-            child: Image.asset(
+            child: Image.network(
               imageLink,
               width: double.infinity,
               height: 500,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
           Column(children: [

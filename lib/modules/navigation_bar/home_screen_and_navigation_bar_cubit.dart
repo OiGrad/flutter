@@ -22,15 +22,17 @@ class HomeScreenAndNavigationBarCubit
   EdgeInsets padding = const EdgeInsets.all(30);
   SnakeShape mySnakeShape = SnakeShape.circle;
 
-
-
-
-
   // TODO : Handle Icons
   List<BottomNavigationBarItem> bottomNavigationBarItems = [
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-    const BottomNavigationBarItem(icon: Icon(Icons.bookmark_added_outlined), label: 'favorites'),
-    BottomNavigationBarItem(icon: Image.asset('assets/images/ai_icon.png',color: Colors.white,), label: 'Travel Assistant'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.bookmark_added_outlined), label: 'favorites'),
+    BottomNavigationBarItem(
+        icon: Image.asset(
+          'assets/images/ai_icon.png',
+          color: Colors.white,
+        ),
+        label: 'Travel Assistant'),
     const BottomNavigationBarItem(icon: Icon(Icons.comment), label: 'posts'),
     const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'user')
   ];
@@ -39,7 +41,7 @@ class HomeScreenAndNavigationBarCubit
     HomeScreen(),
     FavoritesScreen(),
     TravelAssistantView(),
-    UserScreen(),
+    PostsScreen(),
     UserScreen(),
   ];
 

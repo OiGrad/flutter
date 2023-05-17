@@ -2,30 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:kemet/core/colors.dart';
+import 'package:kemet/core/navigation.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/helper/end_points.dart';
 import 'package:kemet/modules/widgets/place_details.dart';
 
 import '../../widgets/widgets.dart';
+import '../directions/directions_screen.dart';
 
 //TODO: use the real data.
 String title = "الكنيسة المعلقة";
 double placeRating = 5;
 
-class PlaceDirections extends StatefulWidget {
+class PlaceDirections extends StatelessWidget {
   final String title;
   final double placeRating;
-  const PlaceDirections(
-      {required this.title, required this.placeRating, super.key});
-
-  @override
-  State<PlaceDirections> createState() =>
-      _PlaceDirectionsState(title, placeRating);
-}
-
-class _PlaceDirectionsState extends State<PlaceDirections> {
-  final String title;
-  final double placeRating;
-  _PlaceDirectionsState(this.title, this.placeRating);
+  var image;
+  PlaceDirections(
+      {required this.title,
+      required this.placeRating,
+      required this.image,
+      super.key});
 
   TextEditingController startController = TextEditingController();
   TextEditingController endController = TextEditingController();
@@ -37,6 +34,7 @@ class _PlaceDirectionsState extends State<PlaceDirections> {
       context,
       title: title,
       imageHeight: 400,
+      imageLink: "${AppEndPoints.baseUrl}$image",
       headCardItem: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -199,7 +197,16 @@ class _PlaceDirectionsState extends State<PlaceDirections> {
           width: MediaQuery.of(context).size.width * 0.4,
           text: AppStringsInEnglish.search,
           color: const Color.fromARGB(255, 228, 164, 37),
-          function: () {},
+          function: () {
+            navigateTo(
+                context,
+                DirectionsView(
+                  title: title,
+                  placeRating: placeRating,
+                  image: image,
+                  targit: startController.text,
+                ));
+          },
           context: context,
         ),
       ],

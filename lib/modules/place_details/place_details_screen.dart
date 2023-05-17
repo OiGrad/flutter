@@ -4,9 +4,11 @@ import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/navigation.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/helper/end_points.dart';
 import 'package:kemet/models/place_model.dart';
 import 'package:kemet/modules/directions/place_directions/place_directions_screen.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../widgets/place_details.dart';
 
@@ -37,6 +39,7 @@ class PlaceView extends StatelessWidget {
       body: detailedScreenDraft(
         context,
         title: place.name,
+        imageLink: "${AppEndPoints.baseUrl}${place.main_Image}",
         headCardItem: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -54,10 +57,11 @@ class PlaceView extends StatelessWidget {
                 itemBuilder: (context, _) => const Icon(
                   Icons.star,
                   color: Colors.amber,
-                ), onRatingUpdate: (double value) {},
+                ),
+                onRatingUpdate: (double value) {},
               ),
             ),
-            Text("${placeRating.toString()}/5"),
+            Text("${place.rate.toString()}/5"),
           ],
         ),
         children: [
@@ -73,12 +77,11 @@ class PlaceView extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                //TODO:add the correct icons
-                Icon(Icons.pause_circle),
-                Text(place.price),
+                Icon(FontAwesomeIcons.sterlingSign),
+                Text(place.price.toString()),
 
-                Icon(Icons.pause_circle),
-                Text(place.name),
+                /*Icon(Icons.pause_circle),
+                Text(place.name),*/
               ],
             ),
           ),
@@ -149,8 +152,13 @@ class PlaceView extends StatelessWidget {
             color: const Color.fromARGB(255, 228, 164, 37),
             //TODO : HELP !!!!!!!!!!!!!
             function: () {
-              navigateTo(context,
-                  PlaceDirections(title: title, placeRating: placeRating));
+              navigateTo(
+                  context,
+                  PlaceDirections(
+                    title: place.name,
+                    placeRating: place.rate,
+                    image: place.main_Image,
+                  ));
             },
             context: context,
           ),
@@ -175,8 +183,8 @@ class PlaceView extends StatelessWidget {
                             BorderRadiusDirectional.all(Radius.circular(15)),
                         border: Border.all(color: AppColors.orange),
                       ),
-                      child: Image.asset(
-                        place.gallery[index],
+                      child: Image.network(
+                        "${AppEndPoints.baseUrl}${place.gallery[0][index]['image']}",
                         width: 120,
                         height: 150,
                         fit: BoxFit.cover,
@@ -203,7 +211,7 @@ class PlaceView extends StatelessWidget {
             ),
           ),*/
 
-          headNote(context, text: AppStringsInArabic.reviews)
+          //headNote(context, text: AppStringsInArabic.reviews)
           //TODO: add the post component.
         ],
       ),

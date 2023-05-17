@@ -121,7 +121,8 @@ class HomeScreen extends StatelessWidget {
                                 MediaQueryValues(context).width * 1 / 30,
                           ),
                           itemBuilder: (context, item) {
-                            return cardOfPlace(context,myBloc.placesList[0]);
+                            return cardOfPlace(
+                                context, myBloc.placesList[item]);
                           },
                         ),
                       ),
@@ -181,7 +182,7 @@ class HomeScreen extends StatelessWidget {
                                 MediaQueryValues(context).width * 1 / 30,
                           ),
                           itemBuilder: (context, item) {
-                            return cardOfGov(context,myBloc.citiesList[item]);
+                            return cardOfGov(context, myBloc.citiesList[item]);
                           },
                         ),
                       ),

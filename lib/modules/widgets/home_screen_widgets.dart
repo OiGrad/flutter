@@ -17,7 +17,7 @@ Widget welcomeWidget(context) {
   return Column(
     children: [
       Container(
-        height: MediaQueryValues(context).height * 1 / 10,
+        height: MediaQueryValues(context).height * 1 / 9,
         decoration: BoxDecoration(
           color: AppColors.blackWithOpacity,
           borderRadius: BorderRadius.circular(19),
@@ -46,11 +46,14 @@ Widget welcomeWidget(context) {
                   children: [
                     Row(
                       children: [
-                        BlocConsumer<SignInAndSignUpCubit , SignInAndSignUpState>(
-                          listener:(context , state){} ,
-                          builder: (context , state){
+                        BlocConsumer<SignInAndSignUpCubit,
+                            SignInAndSignUpState>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
                             return Text(
-                              BlocProvider.of<SignInAndSignUpCubit>(context).userModel!.username,
+                              BlocProvider.of<SignInAndSignUpCubit>(context)
+                                  .userModel!
+                                  .username,
                               style: TextStyle(
                                 fontSize: 20,
                                 color: AppColors.white,
@@ -59,7 +62,6 @@ Widget welcomeWidget(context) {
                             );
                           },
                         ),
-
                         Text(
                           AppStringsInArabic.welcomeInHomeScreen,
                           style: TextStyle(
@@ -110,7 +112,7 @@ Widget textWidget(context, text, size, textColor) {
   );
 }
 
-Widget categoryWidget(context,PlaceCategory placeCategory) {
+Widget categoryWidget(context, PlaceCategory placeCategory) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
@@ -147,10 +149,14 @@ Widget categoryWidget(context,PlaceCategory placeCategory) {
   );
 }
 
-Widget cardOfPlace(context,Place place) {
+Widget cardOfPlace(context, Place place) {
   return InkWell(
     onTap: () {
-      navigateTo(context, PlaceView(place: place,));
+      navigateTo(
+          context,
+          PlaceView(
+            place: place,
+          ));
     },
     child: Container(
       decoration: BoxDecoration(
@@ -172,7 +178,12 @@ Widget cardOfPlace(context,Place place) {
         children: [
           Container(
             height: MediaQueryValues(context).height * 2 / 14,
-            child: Image.network('${AppEndPoints.baseUrl}${place.main_Image}'),
+            child: Image.network(
+              '${AppEndPoints.baseUrl}${place.main_Image}',
+              width: (MediaQueryValues(context).width * 5 / 11) - 20,
+              height: MediaQueryValues(context).height * 5 / 25,
+              fit: BoxFit.fill,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
@@ -208,7 +219,7 @@ Widget cardOfPlace(context,Place place) {
   );
 }
 
-Widget cardOfGov(context ,City city) {
+Widget cardOfGov(context, City city) {
   return InkWell(
     onTap: () {
       navigateTo(context, CityView());
@@ -232,7 +243,10 @@ Widget cardOfGov(context ,City city) {
         children: [
           Container(
             height: MediaQueryValues(context).height * 2 / 14,
-            child: Image.network('${AppEndPoints.baseUrl}${city.main_Image}',fit: BoxFit.cover,),
+            child: Image.network(
+              '${AppEndPoints.baseUrl}${city.main_Image}',
+              fit: BoxFit.cover,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),

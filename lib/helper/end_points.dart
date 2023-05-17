@@ -8,7 +8,7 @@ class AppEndPoints {
   //static const String baseUrl = 'https://fe80::4e61:c1c8:e751:ff87%4/';
 
   static const String signUp = '${baseUrl}users/signup/';
-  static const String login = '${baseUrl}users/singin';
+  static const String login = '${baseUrl}users/singin/';
   static const String token = '${baseUrl}token/';
 
   static const String getCategory = '${baseUrl}places/category/';
