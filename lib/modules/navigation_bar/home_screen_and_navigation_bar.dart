@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
+import 'package:kemet/core/navigation.dart';
 import 'package:kemet/modules/navigation_bar/home_screen_and_navigation_bar_cubit.dart';
 
 class HomeScreenAndNavigationBar extends StatelessWidget {
@@ -22,8 +23,12 @@ class HomeScreenAndNavigationBar extends StatelessWidget {
             body:Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                myBloc.screensOfNavBar[myBloc.currentIndex],
-                SnakeNavigationBar.color(
+                // if(myBloc.currentIndex!=2)
+                  myBloc.screensOfNavBar[myBloc.currentIndex],
+                // if(myBloc.currentIndex==2)
+                //   navigateTo(context, myBloc.screensOfNavBar[myBloc.currentIndex],),
+                if(myBloc.currentIndex!=2)
+                  SnakeNavigationBar.color(
                   elevation: 5.0,
                   height: MediaQueryValues(context).height*1/12,
                   shape: myBloc.bottomBarShape,
