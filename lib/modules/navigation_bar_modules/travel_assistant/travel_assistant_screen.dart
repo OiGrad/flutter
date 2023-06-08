@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kemet/core/colors.dart';
+import 'package:kemet/core/navigation.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/modules/navigation_bar/home_screen_and_navigation_bar.dart';
 
 //TODO: create the screen.
 class TravelAssistantView extends StatefulWidget {
@@ -27,6 +29,12 @@ class _TravelAssistantViewState extends State<TravelAssistantView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary,
+        leading: IconButton(
+          onPressed: () {
+            navigateToAndReplacement(context,const HomeScreenAndNavigationBar() ,);
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
         title: Row(
           children: [
             Image.asset(
@@ -50,14 +58,11 @@ class _TravelAssistantViewState extends State<TravelAssistantView> {
               messageReceiver('Hi Abanob Ashraf'),
               messageReceiver('I’m TATA your Travel Assistant Bot'),
               messageReceiver('I will recommend the Right Trip for you?'),
-
               messageSender('Awesome 😍!'),
-
               messageReceiver('What\'s your budget for the trip?'),
-
               messageSender('1000/300 EGP'),
-
-              messageReceiver('Are you traveling alone or with friends/family?'),
+              messageReceiver(
+                  'Are you traveling alone or with friends/family?'),
             ],
           ),
           Align(
