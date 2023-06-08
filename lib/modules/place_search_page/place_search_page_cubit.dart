@@ -1,7 +1,14 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:kemet/models/place_hint.dart';
 import 'package:kemet/models/place_model.dart';
 import 'package:meta/meta.dart';
+import 'package:kemet/helper/remote/dio_helper.dart';
+
+import '../../core/colors.dart';
+import '../../core/strings.dart';
+import '../../helper/end_points.dart';
+import '../widgets/snackbar_widget.dart';
 
 part 'place_search_page_state.dart';
 
@@ -10,8 +17,28 @@ class PlaceSearchPageCubit extends Cubit<PlaceSearchPageState> {
 
   List<PlaceHint> searchResults = [];
 
-  void getSearchResuls(String query) {
-    //TODO:update the search results
+  void getSearchResuls(BuildContext context, String query) {
+    emit(GetPlacesLoading());
+    DioHelper.getData(
+      url: AppEndPoints.searchPlaces,
+      query: {"name": query},
+    ).then(
+      (value) {
+        searchResults = [];
+        print(value.data);
+        value.data.forEach((e) {
+          searchResults.add(PlaceHint.fromJson(e));
+        });
+        emit(GetPlacesSuccess());
+      },
+    ).catchError((e) {
+      print(e.toString());
+      showSnackBar(
+          context: context,
+          text: AppStringsInEnglish.errorGetingPlaces,
+          clr: AppColors.error);
+      emit(GetPlacesError());
+    });
   }
 
   addSomePlaces() {

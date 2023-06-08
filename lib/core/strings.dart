@@ -77,6 +77,7 @@ class AppStringsInEnglish {
   static const String postTailHint = 'What else?';
   static const String postPublished = 'Post Published successfully';
   static const String errorPublishingPost = 'Error in Post Publishing';
+  static const String errorGetingPlaces = 'Error in get Places';
 }
 
 class AppStringsInArabic {
@@ -119,4 +120,5 @@ class AppStringsInArabic {
   static const String postTailHint = 'اضف المزيد';
   static const String postPublished = 'تم النشر بنجاح';
   static const String errorPublishingPost = 'خطأ في النشر';
+  static const String errorGetingPlaces = 'خطأ في طلب الاماكن';
 }
