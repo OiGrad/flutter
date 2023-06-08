@@ -3,6 +3,8 @@ import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/models/place_hint.dart';
 
+import '../../helper/end_points.dart';
+
 Widget defaultTextFormField({
   initValue,
   required validator,
@@ -139,8 +141,8 @@ Widget defaultButton({
 Widget PlaceInContext(context, PlaceHint placeHint) {
   return Row(
     children: [
-      Image.asset(
-        placeHint.image,
+      Image.network(
+        '${AppEndPoints.baseUrl}${placeHint.image}',
         width: MediaQueryValues(context).width / 6,
         height: MediaQueryValues(context).width / 6,
         fit: BoxFit.cover,

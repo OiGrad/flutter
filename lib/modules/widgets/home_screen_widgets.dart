@@ -243,10 +243,12 @@ Widget cardOfGov(context, City city) {
         children: [
           Container(
             height: MediaQueryValues(context).height * 2 / 14,
-            child: Image.network(
-              '${AppEndPoints.baseUrl}${city.main_Image}',
-              fit: BoxFit.cover,
-            ),
+            child: /*Image.network(
+                    '${AppEndPoints.baseUrl}${city.main_Image}',
+                    fit: BoxFit.cover,
+                  )
+                */
+                Image.asset('assets/images/kemet.png'),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),

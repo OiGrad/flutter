@@ -12,7 +12,7 @@ class PlaceHint {
     return PlaceHint(
       id: json['id'],
       name: json['name'],
-      image: json['image'],
+      image: json['image'] ?? json['main_Image'],
     );
   }
 

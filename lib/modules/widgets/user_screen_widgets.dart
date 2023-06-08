@@ -69,8 +69,18 @@ Widget userInformation(context, editFunc) {
       ),
       Row(
         children: [
-          defaultButton(text: 'Recent Trips', color: AppColors.primary, function: (){}, context: context,width: 0),
-          defaultButton(text: 'Recent Trips', color: AppColors.primary, function: (){}, context: context,width: 0),
+          defaultButton(
+              text: 'Recent Trips',
+              color: AppColors.primary,
+              function: () {},
+              context: context,
+              width: 0),
+          defaultButton(
+              text: 'Recent Trips',
+              color: AppColors.primary,
+              function: () {},
+              context: context,
+              width: 0),
         ],
       ),
     ],
