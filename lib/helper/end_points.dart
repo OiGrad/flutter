@@ -2,7 +2,7 @@ class AppEndPoints {
   // static const String baseUrl = 'http://www.kemeteg.live/';
   //192.168.137.133:8000/
   //192.168.1.94:8080
-  static const String baseUrl = 'http://192.168.1.4:8000';
+  static const String baseUrl = 'http://192.168.1.10:8000';
   //static const String baseUrl = 'http://192.168.1.5:8000/';
   // static const String baseUrl = 'https://58e9-197-36-209-110.ngrok-free.app/';
   //static const String baseUrl = 'https://fe80::4e61:c1c8:e751:ff87%4/';

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +7,6 @@ import 'package:kemet/models/in_post_class.dart';
 import 'package:kemet/modules/create_post/create_post_cubit.dart';
 import 'package:kemet/modules/place_search_page/place_search_page_screen.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
-
 import '../../core/colors.dart';
 import '../../core/media_query_values.dart';
 import '../../core/strings.dart';
