@@ -222,7 +222,11 @@ Widget cardOfPlace(context, Place place) {
 Widget cardOfGov(context, City city) {
   return InkWell(
     onTap: () {
-      navigateTo(context, CityView());
+      navigateTo(
+          context,
+          CityView(
+            city: city,
+          ));
     },
     child: Container(
       decoration: BoxDecoration(
@@ -243,12 +247,10 @@ Widget cardOfGov(context, City city) {
         children: [
           Container(
             height: MediaQueryValues(context).height * 2 / 14,
-            child: /*Image.network(
-                    '${AppEndPoints.baseUrl}${city.main_Image}',
-                    fit: BoxFit.cover,
-                  )
-                */
-                Image.asset('assets/images/kemet.png'),
+            child: Image.network(
+              '${AppEndPoints.baseUrl}${city.main_Image}',
+              fit: BoxFit.cover,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
