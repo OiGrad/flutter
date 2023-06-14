@@ -25,6 +25,11 @@ class AppEndPoints {
     return '${baseUrl}/places/${placeId}';
   }
 
+  static String getPlaceByCityId(cityId) {
+    return '${baseUrl}/places/Get-Place-By-City-Id/${cityId}';
+  }
+
   static const String postComment = '${baseUrl}/comments/comments/';
   static const String searchPlaces = '${baseUrl}/places/search/';
+  static const String getFavPlaces = '${baseUrl}/fav/GetMyFavPlace';
 }
