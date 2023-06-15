@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:kemet/core/navigation.dart';
 import 'package:kemet/modules/navigation_bar_modules/favorites/favorites_screen.dart';
 import 'package:kemet/modules/navigation_bar_modules/home/home_screen.dart';
 import 'package:kemet/modules/navigation_bar_modules/posts/posts_screen.dart';
@@ -57,9 +58,16 @@ class HomeScreenAndNavigationBarCubit
     UserScreen(),
   ];
 
-  void changeBottomNavigationBarIndex(newIndex) {
+  void changeBottomNavigationBarIndex(newIndex,context) {
     emit(HomeScreenAndNavigationBarCurrentIndex());
-    currentIndex = newIndex;
+    if(newIndex==2){
+      // currentIndex = 0;
+      navigateTo(context, const TravelAssistantView());
+    }
+    if(newIndex!=2){
+      currentIndex = newIndex;
+    }
+
     emit(HomeScreenAndNavigationBarMovingIndex());
   }
 }

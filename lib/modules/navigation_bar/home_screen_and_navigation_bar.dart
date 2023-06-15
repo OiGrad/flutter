@@ -27,7 +27,7 @@ class HomeScreenAndNavigationBar extends StatelessWidget {
                   myBloc.screensOfNavBar[myBloc.currentIndex],
                 // if(myBloc.currentIndex==2)
                 //   navigateTo(context, myBloc.screensOfNavBar[myBloc.currentIndex],),
-                if(myBloc.currentIndex!=2)
+                // if(myBloc.currentIndex!=2)
                   SnakeNavigationBar.color(
                   elevation: 5.0,
                   height: MediaQueryValues(context).height*1/12,
@@ -41,7 +41,7 @@ class HomeScreenAndNavigationBar extends StatelessWidget {
                   snakeShape: myBloc.mySnakeShape,
                   snakeViewColor:AppColors.black,
                   onTap:(index){
-                    myBloc.changeBottomNavigationBarIndex(index);
+                    myBloc.changeBottomNavigationBarIndex(index,context);
                   },
                 )
               ],
