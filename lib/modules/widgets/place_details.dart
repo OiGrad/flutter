@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kemet/core/navigation.dart';
+import 'package:kemet/helper/end_points.dart';
 
 import '../../core/colors.dart';
 import '../../core/media_query_values.dart';
@@ -8,7 +9,7 @@ Widget detailedScreenDraft(
   context, {
   required String title,
   double imageHeight = 200,
-  String imageLink = 'assets/images/placeImage.jpg',
+  String imageLink = '${AppEndPoints.baseUrl}/media/places/kemet.png',
   Widget? headCardItem,
   required List<Widget> children,
 }) {

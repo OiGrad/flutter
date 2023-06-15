@@ -86,15 +86,10 @@ class CreatePostCubit extends Cubit<CreatePostState> {
 
   serializePost() async {
     var serializedContent = [];
-    var img;
-    bool hasimage = false;
     for (var i = 0; i < contentList.length; i++) {
-      var serialized = contentList[i].toJson(i + 1);
+      var serialized = await contentList[i].toJson(i + 1);
       if (serialized != null) {
-        if (contentList[i].type == 'image') {
-          hasimage = true;
-        }
-        serializedContent.add(await serialized);
+        serializedContent.add(serialized);
         print('------------${await serialized}---------');
       }
     }

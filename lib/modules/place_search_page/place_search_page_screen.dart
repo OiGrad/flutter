@@ -80,8 +80,9 @@ class _PlaceSearchPageState extends State<PlaceSearchPage> {
                       ),
                     ),
                     onChanged: (value) {
-                      //myCubit.getSearchResuls(controller.text);
-                      myCubit.addSomePlaces();
+                      if (controller.text.isNotEmpty) {
+                        myCubit.getSearchResuls(context, controller.text);
+                      }
                     },
                   ),
                 ),

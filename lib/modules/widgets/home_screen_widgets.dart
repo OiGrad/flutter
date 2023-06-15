@@ -222,7 +222,11 @@ Widget cardOfPlace(context, Place place) {
 Widget cardOfGov(context, City city) {
   return InkWell(
     onTap: () {
-      navigateTo(context, CityView());
+      navigateTo(
+          context,
+          CityView(
+            city: city,
+          ));
     },
     child: Container(
       decoration: BoxDecoration(
