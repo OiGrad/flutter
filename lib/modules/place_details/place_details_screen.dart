@@ -47,7 +47,7 @@ class PlaceView extends StatelessWidget {
               padding: EdgeInsetsDirectional.fromSTEB(3, 3, 3, 3),
               child: RatingBar.builder(
                 ignoreGestures: true,
-                initialRating: place.rate,
+                initialRating: double.parse(place.rate),
                 minRating: 1,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
@@ -77,8 +77,18 @@ class PlaceView extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Icon(FontAwesomeIcons.sterlingSign),
-                Text(place.price.toString()),
+                Row(
+                  children: [
+                    // Icon(
+                    //   FontAwesomeIcons.dollarSign,
+                    //   size: 25,
+                    // ),
+                    Text(
+                      "EGP ${place.price.toString()}",
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ],
+                ),
 
                 /*Icon(Icons.pause_circle),
                 Text(place.name),*/
