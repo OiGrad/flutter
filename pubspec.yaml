@@ -27,8 +27,8 @@ dependencies:
   dotted_border: ^2.0.0+3
   timeago: ^3.4.0
   font_awesome_flutter: ^10.4.0
-  chat_gpt_sdk: ^2.1.8
-  http: ^0.13.3
+
+  
 
 
 dev_dependencies:

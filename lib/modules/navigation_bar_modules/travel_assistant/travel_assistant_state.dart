@@ -14,3 +14,7 @@ class SendMessageError extends TravelAssistantState {}
 
 class AddMessageToListLoading extends TravelAssistantState {}
 class AddMessageToListSuccess extends TravelAssistantState {}
+
+class GetMessageFromAILoading extends TravelAssistantState {}
+class GetMessageFromAISuccess extends TravelAssistantState {}
+class GetMessageFromAIError extends TravelAssistantState {}

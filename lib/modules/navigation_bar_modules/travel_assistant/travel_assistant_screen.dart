@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/colors.dart';
@@ -74,6 +75,7 @@ class _TravelAssistantViewState extends State<TravelAssistantView> {
                       children: <Widget>[
                         Expanded(
                           child: TextField(
+                            maxLines: 3,
                             controller: myCubit.chatController,
                             decoration: const InputDecoration(
                                 hintText: "Type Something",
@@ -84,18 +86,24 @@ class _TravelAssistantViewState extends State<TravelAssistantView> {
                         const SizedBox(
                           width: 15,
                         ),
-                        FloatingActionButton(
-                          onPressed: () {
-                            // myCubit.completeWithSSE();
-                            myCubit.addMessageInChat(
-                                myCubit.chatController.text.trim(), 'receiver');
-                          },
-                          backgroundColor: Colors.black,
-                          elevation: 0,
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                            size: 35,
+                        ConditionalBuilder(
+                          condition: state is !GetMessageFromAILoading,
+                          fallback: (context)=> const Center(
+                            child:SizedBox(),
+                          ),
+                          builder:(context)=> FloatingActionButton(
+                            onPressed: () {
+                              // myCubit.completeWithSSE();
+                              myCubit.addMessageInChat(
+                                  myCubit.chatController.text.trim(), 'receiver');
+                            },
+                            backgroundColor: Colors.black,
+                            elevation: 0,
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 35,
+                            ),
                           ),
                         ),
                       ],
