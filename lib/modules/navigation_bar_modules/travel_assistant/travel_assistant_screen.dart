@@ -69,7 +69,7 @@ class _TravelAssistantViewState extends State<TravelAssistantView> {
                         border: Border.all(color: AppColors.grey, width: 2)),
                     padding:
                         const EdgeInsets.only(left: 10, bottom: 10, top: 10),
-                    height: 60,
+                    height: 75,
                     width: double.infinity,
                     child: Row(
                       children: <Widget>[
