@@ -26,17 +26,14 @@ class TravelAssistantCubit extends Cubit<TravelAssistantState> {
   List<ChatMessageModel> messages = [
     // TODO : make the name dynamic
     ChatMessageModel(
-        messageContent: 'Hi Abanob Ashraf', messageType: 'receiver'),
+        messageContent: 'Hi Abanob Ashraf', messageType: 'sender'),
     ChatMessageModel(
         messageContent: 'I’m TATA your Travel Assistant Bot',
-        messageType: 'receiver'),
+        messageType: 'sender'),
     ChatMessageModel(
         messageContent: 'I will recommend the Right Trip for you?',
-        messageType: 'receiver'),
-    ChatMessageModel(
-      messageContent: 'last',
-      messageType: 'receiver',
-    ),
+        messageType: 'sender'),
+
   ];
 
   void addMessageInChat(messageContent, messageType) {
@@ -52,6 +49,7 @@ class TravelAssistantCubit extends Cubit<TravelAssistantState> {
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOut,
         );
+        messages.add(ChatMessageModel(messageContent: '...', messageType: 'sender'));
         emit(AddMessageToListSuccess());
         getAIMessage(question: msg);
       }
@@ -81,6 +79,7 @@ class TravelAssistantCubit extends Cubit<TravelAssistantState> {
     ).then((value) {
       // print('Success');
       // print();
+      messages.removeLast();
       messages.add(ChatMessageModel(messageContent: value.data['openai']['generated_text'], messageType: 'sender'));
       emit(GetMessageFromAISuccess());
 

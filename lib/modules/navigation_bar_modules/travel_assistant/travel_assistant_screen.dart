@@ -18,18 +18,7 @@ class TravelAssistantView extends StatefulWidget {
 }
 
 class _TravelAssistantViewState extends State<TravelAssistantView> {
-  List<ChatMessageModel> messages = [
-    ChatMessageModel(messageContent: "Hello, Will", messageType: "receiver"),
-    ChatMessageModel(
-        messageContent: "How have you been?", messageType: "receiver"),
-    ChatMessageModel(
-        messageContent: "Hey Kriss, I am doing fine dude. wbu?",
-        messageType: "sender"),
-    ChatMessageModel(
-        messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-    ChatMessageModel(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
