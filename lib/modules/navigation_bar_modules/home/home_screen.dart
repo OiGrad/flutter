@@ -186,6 +186,9 @@ class HomeScreen extends StatelessWidget {
                           },
                         ),
                       ),
+                      SizedBox(
+                        height: MediaQueryValues(context).height * 1 / 8,
+                      )
                     ],
                   ),
                 ),

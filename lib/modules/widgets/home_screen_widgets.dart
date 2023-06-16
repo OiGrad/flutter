@@ -176,13 +176,13 @@ Widget cardOfPlace(context, Place place) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: MediaQueryValues(context).height * 2 / 14,
+          Expanded(
+            // height: MediaQueryValues(context).height * 2 / 14,
             child: Image.network(
               '${AppEndPoints.baseUrl}${place.main_Image}',
-              width: (MediaQueryValues(context).width * 5 / 11) - 20,
-              height: MediaQueryValues(context).height * 5 / 25,
-              fit: BoxFit.fill,
+              // width: (MediaQueryValues(context).width * 5 / 11) - 20,
+              // height: MediaQueryValues(context).height * 5 / 25,
+              fit: BoxFit.cover,
             ),
           ),
           Padding(
@@ -245,8 +245,8 @@ Widget cardOfGov(context, City city) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: MediaQueryValues(context).height * 2 / 14,
+          Expanded(
+            // height: MediaQueryValues(context).height * 2 / 14,
             child: Image.network(
               '${AppEndPoints.baseUrl}${city.main_Image}',
               fit: BoxFit.cover,
@@ -264,12 +264,12 @@ Widget cardOfGov(context, City city) {
                 ),
                 Row(
                   children: [
-                    CircleAvatar(
-                      backgroundColor: AppColors.primary,
-                      minRadius: 10,
-                      child: Icon(Icons.favorite,
-                          size: 15, color: AppColors.white),
-                    ),
+                    // CircleAvatar(
+                    //   backgroundColor: AppColors.primary,
+                    //   minRadius: 10,
+                    //   child: Icon(Icons.favorite,
+                    //       size: 15, color: AppColors.white),
+                    // ),
                     const Spacer(),
                     Text(
                       city.nick_name,
