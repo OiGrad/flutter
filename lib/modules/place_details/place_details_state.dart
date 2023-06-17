@@ -10,3 +10,9 @@ class SetAsFavLoading extends PlaceDetailsState {}
 class SetAsFavSuccess extends PlaceDetailsState {}
 
 class SetAsFavError extends PlaceDetailsState {}
+
+class RatePlaceLoading extends PlaceDetailsState {}
+
+class RatePlaceSuccess extends PlaceDetailsState {}
+
+class RatePlaceError extends PlaceDetailsState {}

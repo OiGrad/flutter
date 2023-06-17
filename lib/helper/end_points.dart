@@ -37,5 +37,7 @@ class AppEndPoints {
     return '${baseUrl}/fav/FavActions/${placeId}';
   }
 
+  static const String ratePlace = '${baseUrl}/rate/rate_place';
+
   static const String getMessageFromAI = 'https://api.edenai.run/v2/text/chat';
 }

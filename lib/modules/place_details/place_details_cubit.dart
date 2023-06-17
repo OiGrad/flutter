@@ -34,7 +34,7 @@ class PlaceDetailsCubit extends Cubit<PlaceDetailsState> {
   void unFavPlace(context, placeId) async {
     emit(SetAsFavLoading());
 
-    await DioHelper.deleteData(
+    DioHelper.deleteData(
       url: AppEndPoints.setFavPlace(placeId),
       data: {},
     ).then((value) {
@@ -49,6 +49,26 @@ class PlaceDetailsCubit extends Cubit<PlaceDetailsState> {
           text: 'Error in remove Place from Favorites',
           clr: Colors.red);
       emit(SetAsFavError());
+    });
+  }
+
+  ratePlace(context, placeId, rate) async {
+    emit(RatePlaceLoading());
+
+    DioHelper.postData(
+      url: AppEndPoints.ratePlace,
+      data: {"place_id": placeId, "rate": "$rate"},
+    ).then((value) {
+      showSnackBar(
+          context: context,
+          text: 'Place rate is saved Successfully',
+          clr: Colors.green);
+      emit(RatePlaceSuccess());
+    }).catchError((err) {
+      print(err.toString());
+      showSnackBar(
+          context: context, text: 'Error in rate Place', clr: Colors.red);
+      emit(RatePlaceError());
     });
   }
 }
