@@ -73,7 +73,7 @@ chatAppBar(context) {
           fit: BoxFit.cover,
         ),
         const SizedBox(
-          width: 20,
+          width: 15,
         ),
         const Text(
           AppStringsInEnglish.bot,
@@ -83,6 +83,3 @@ chatAppBar(context) {
     ),
   );
 }
-
-
-
