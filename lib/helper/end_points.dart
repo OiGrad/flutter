@@ -31,5 +31,9 @@ class AppEndPoints {
 
   static const String postComment = '${baseUrl}/comments/comments/';
   static const String searchPlaces = '${baseUrl}/places/search/';
+
   static const String getFavPlaces = '${baseUrl}/fav/GetMyFavPlace';
+  static String setFavPlace(placeId) {
+    return '${baseUrl}/fav/FavActions/${placeId}';
+  }
 }
