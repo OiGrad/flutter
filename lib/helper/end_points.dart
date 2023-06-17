@@ -36,4 +36,6 @@ class AppEndPoints {
   static String setFavPlace(placeId) {
     return '${baseUrl}/fav/FavActions/${placeId}';
   }
+
+  static const String getMessageFromAI = 'https://api.edenai.run/v2/text/chat';
 }
