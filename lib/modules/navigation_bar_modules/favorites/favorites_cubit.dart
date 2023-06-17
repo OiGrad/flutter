@@ -20,10 +20,11 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     await DioHelper.getData(
       url: AppEndPoints.getFavPlaces,
     ).then((value) {
-      //TODO: add the places to the placesList.
-      value.data['results'][0]['place'].forEach((e) {
-        places.add(Place.fromJson(e));
-      });
+      if ((value.data['results'] as List).isNotEmpty) {
+        value.data['results'][0]['place'].forEach((e) {
+          places.add(Place.fromJson(e));
+        });
+      }
       emit(GetFavoritPlacesSuccess());
     }).catchError((err) {
       showSnackBar(

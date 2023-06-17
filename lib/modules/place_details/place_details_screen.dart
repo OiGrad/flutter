@@ -47,7 +47,7 @@ class PlaceView extends StatelessWidget {
               padding: EdgeInsetsDirectional.fromSTEB(3, 3, 3, 3),
               child: RatingBar.builder(
                 ignoreGestures: true,
-                initialRating: place.rate,
+                initialRating: double.parse(place.rate),
                 minRating: 1,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
@@ -137,8 +137,11 @@ class PlaceView extends StatelessWidget {
             ),
           ),
           headNote(context, text: AppStringsInArabic.location),
-          Text(
-            place.location_text,
+          Padding(
+            padding: EdgeInsets.only(left: 15, right: 15),
+            child: Text(
+              place.location_text,
+            ),
           ),
           // Text(
           //   NMS,
