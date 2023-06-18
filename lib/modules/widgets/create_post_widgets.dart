@@ -87,37 +87,34 @@ SelectPlaceCard(context, int index) {
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             child: Container(
               width: MediaQueryValues(context).width - 40,
-              height: 150,
+              //height: 150,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   mycubit.contentList[index].placeHint == null
-                      ? Expanded(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-                            child: InkWell(
-                              onTap: () {
-                                navigateTo(
-                                    context, PlaceSearchPage(index: index));
-                              },
-                              child: TextFormField(
-                                enabled: false,
-                                decoration: InputDecoration(
-                                  labelText: AppStringsInEnglish.search,
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: AppColors.primary, // Colors.black,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(25),
+                      ? Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                          child: InkWell(
+                            onTap: () {
+                              navigateTo(
+                                  context, PlaceSearchPage(index: index));
+                            },
+                            child: TextFormField(
+                              enabled: false,
+                              decoration: InputDecoration(
+                                labelText: AppStringsInEnglish.search,
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: AppColors.primary, //Colors.black,
+                                    width: 1,
                                   ),
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          15, 15, 15, 15),
-                                  suffixIcon: Padding(
-                                    padding: EdgeInsets.all(15),
-                                    child: Icon(Icons.search_rounded),
-                                  ),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    15, 15, 15, 15),
+                                suffixIcon: Padding(
+                                  padding: EdgeInsets.all(15),
+                                  child: Icon(Icons.search_rounded),
                                 ),
                               ),
                             ),

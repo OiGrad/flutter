@@ -34,7 +34,7 @@ class DirectionsView extends StatelessWidget {
         context,
         title: title,
         imageHeight: 250,
-        imageLink: "${AppEndPoints.baseUrl}$image",
+        imageLink: image,
         headCardItem: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

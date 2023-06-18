@@ -34,7 +34,7 @@ class PlaceDirections extends StatelessWidget {
       context,
       title: title,
       imageHeight: 400,
-      imageLink: "${AppEndPoints.baseUrl}$image",
+      imageLink: image,
       headCardItem: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

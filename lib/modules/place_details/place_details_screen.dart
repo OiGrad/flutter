@@ -47,7 +47,7 @@ class PlaceView extends StatelessWidget {
             return detailedScreenDraft(
               context,
               title: place.name,
-              imageLink: "${AppEndPoints.baseUrl}${place.main_Image}",
+              imageLink: place.main_Image,
               headCardItem: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -169,7 +169,7 @@ class PlaceView extends StatelessWidget {
                         context,
                         PlaceDirections(
                           title: place.name,
-                          placeRating: place.rate,
+                          placeRating: double.parse(place.rate),
                           image: place.main_Image,
                         ));
                   },
@@ -197,7 +197,7 @@ class PlaceView extends StatelessWidget {
                               border: Border.all(color: AppColors.orange),
                             ),
                             child: Image.network(
-                              "${AppEndPoints.baseUrl}${place.gallery[0][index]['image']}",
+                              place.gallery[index],
                               width: 120,
                               height: 150,
                               fit: BoxFit.cover,
