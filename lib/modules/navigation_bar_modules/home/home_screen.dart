@@ -9,12 +9,19 @@ import 'package:kemet/helper/shimmer/category_shimmer.dart';
 import 'package:kemet/modules/navigation_bar_modules/home/home_screen_cubit.dart';
 import 'package:kemet/modules/widgets/home_screen_widgets.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
+import '../../../core/navigation.dart';
+import '../../../models/place_hint.dart';
+import '../../../models/place_model.dart';
+import '../../create_post/create_post_cubit.dart';
+import '../../place_details/place_details_screen.dart';
+import '../../place_search_page/place_search_page_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _controller = TextEditingController();
     return BlocProvider(
       create: (context) => HomeScreenCubit()
         ..getCategory(context: context)
@@ -35,18 +42,86 @@ class HomeScreen extends StatelessWidget {
                       welcomeWidget(context),
                       textWidget(context, AppStringsInArabic.whereWillYouGo,
                           25.0, AppColors.black),
-                      defaultTextFormField(
-                        arabic: true,
-                        validator: (value) {
-                          myBloc.validateSearchResult(value);
-                        },
-                        controller: myBloc.searchController,
-                        label: AppStringsInArabic.search,
-                        labelColor: AppColors.hint,
-                        icon: Icons.search,
-                        iconColor: AppColors.hint,
-                        textInputType: TextInputType.text,
-                        isPassword: false,
+                      // defaultTextFormField(
+                      //   arabic: true,
+                      //   validator: (value) {
+                      //     myBloc.validateSearchResult(value);
+                      //   },
+                      //   controller: myBloc.searchController,
+                      //   label: AppStringsInArabic.search,
+                      //   labelColor: AppColors.hint,
+                      //   icon: Icons.search,
+                      //   iconColor: AppColors.hint,
+                      //   textInputType: TextInputType.text,
+                      //   isPassword: false,
+                      // ),
+                      BlocProvider(
+                        create: (context) => PlaceSearchPageCubit(),
+                        child: BlocConsumer<PlaceSearchPageCubit,
+                            PlaceSearchPageState>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
+                            var myCubit =
+                                BlocProvider.of<PlaceSearchPageCubit>(context);
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      5, 5, 5, 5),
+                                  child: TextFormField(
+                                    controller: _controller,
+                                    decoration: InputDecoration(
+                                      hintText: AppStringsInArabic.search,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: AppColors
+                                              .primary, // Colors.black,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: AppColors
+                                              .primary, // Colors.black,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              15, 15, 15, 15),
+                                      prefixIcon: Icon(Icons.search_rounded),
+                                    ),
+                                    onChanged: (value) {
+                                      if (_controller.text.isNotEmpty) {
+                                        myCubit.getSearchResuls(
+                                            context, _controller.text);
+                                      }
+                                    },
+                                  ),
+                                ),
+                                for (int i = 0;
+                                    i < myCubit.searchResults.length;
+                                    i++) ...[
+                                  BlocBuilder<PlaceSearchPageCubit,
+                                      PlaceSearchPageState>(
+                                    builder: (context, state) {
+                                      return InkWell(
+                                        onTap: () async {
+                                          myCubit.navigateById(context, i);
+                                        },
+                                        child:
+                                            Text(myCubit.searchResults[i].name),
+                                      );
+                                    },
+                                  ),
+                                  const Divider(),
+                                ]
+                              ],
+                            );
+                          },
+                        ),
                       ),
 
                       ///TODO : Categories
@@ -89,7 +164,7 @@ class HomeScreen extends StatelessWidget {
                       textWidget(context, AppStringsInArabic.popularPlaces,
                           18.0, AppColors.black),
                       ConditionalBuilder(
-                        condition: state is GetPlacesLoading,
+                        condition: state is GetPlacesHomeLoading,
                         builder: (context) => GridView.builder(
                           physics: const BouncingScrollPhysics(),
                           shrinkWrap: true,
