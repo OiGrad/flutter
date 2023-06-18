@@ -1,5 +1,5 @@
 class PlaceHint {
-  int id;
+  String id;
   String name;
   String image;
   PlaceHint({
@@ -10,7 +10,7 @@ class PlaceHint {
 
   factory PlaceHint.fromJson(Map<String, dynamic> json) {
     return PlaceHint(
-      id: json['id'],
+      id: json['id'].toString(),
       name: json['name'],
       image: json['image'] ?? json['main_Image'],
     );

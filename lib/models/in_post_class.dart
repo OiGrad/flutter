@@ -10,15 +10,14 @@ class PlaceInPost {
   TextEditingController searchController = TextEditingController();
   TextEditingController commentController = TextEditingController();
 
-  toJson(index) {
+  toJson() {
     if (placeHint == null) {
       return null;
     }
     return {
       "type": type,
-      "p_id": placeHint!.id,
-      "content": commentController.text,
-      "index": index,
+      "place_id": placeHint!.id,
+      "text": commentController.text,
     };
   }
 }
@@ -27,14 +26,13 @@ class TextInPost {
   String type = "text";
   TextEditingController controller = TextEditingController();
 
-  toJson(index) {
+  toJson() {
     if (controller.text.isEmpty) {
       return null;
     }
     return {
       "type": type,
-      "content": controller.text,
-      "index": index,
+      "text": controller.text,
     };
   }
 }
@@ -44,13 +42,12 @@ class ImageInPost {
   XFile image;
   ImageInPost(this.image);
 
-  Future<Map<String, dynamic>> toJson(index) async {
+  Map<String, dynamic> toJson() {
     /*List<int> imageBytes = await image.readAsBytes();
     String base64Image = base64.encode(imageBytes);*/
     return {
       "type": type,
-      "image": await image.readAsString(),
-      "index": index,
+      "img": MultipartFile.fromFileSync(image.path, filename: image.name),
     };
   }
 }

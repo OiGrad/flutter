@@ -49,7 +49,7 @@ class _CreatePostState extends State<CreatePost> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          myCubit.addPostDummy(context);
+                          myCubit.postPost(context);
 
                           //TODO:post the post.
                         },
