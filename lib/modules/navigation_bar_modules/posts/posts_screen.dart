@@ -16,19 +16,19 @@ class PostsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.only(top: 35),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    welcomeWidget(context),
-                    BlocProvider(
-                      create: (context) => PostsCubit(),
-                      child: BlocBuilder<PostsCubit, PostsState>(
+      body: BlocProvider(
+        create: (context) => PostsCubit()..getPosts(context),
+        child: Padding(
+          padding: EdgeInsets.only(top: 35),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      welcomeWidget(context),
+                      BlocBuilder<PostsCubit, PostsState>(
                         builder: (context, state) {
                           var myBlok = BlocProvider.of<PostsCubit>(context);
                           return Padding(
@@ -38,47 +38,43 @@ class PostsScreen extends StatelessWidget {
                           );
                         },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                color: AppColors.grey,
-                child: BlocConsumer<PostsCubit, PostsState>(
-                  listener: (context, state) {},
-                  builder: (context, state) {
-                    var myBlok = BlocProvider.of<PostsCubit>(context);
-                    if (state is GetPostsLoading) {
-                      return Column(
-                        children: const [
-                          PostShimmer(),
-                          PostShimmer(),
-                        ],
-                      );
-                    }
-                    if (state is GetPostsSuccess) {
-                      return Column(
-                        children: [
-                          for (int i = 0; i < myBlok.postsList.length; i++)
-                            post(
-                              context,
-                              myBlok.postsList[i],
-                              PlaceHint(
-                                id: 25,
-                                name: "place name",
-                                image:
-                                    "https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png",
+                Container(
+                  color: AppColors.grey,
+                  child: BlocConsumer<PostsCubit, PostsState>(
+                    listener: (context, state) {},
+                    builder: (context, state) {
+                      var myBlok = BlocProvider.of<PostsCubit>(context);
+                      if (state is GetPostsLoading) {
+                        return Column(
+                          children: const [
+                            PostShimmer(),
+                            PostShimmer(),
+                          ],
+                        );
+                      }
+                      if (state is GetPostsSuccess) {
+                        return Column(
+                          children: [
+                            for (int i = 0; i < myBlok.postsList.length; i++)
+                              post(
+                                context,
+                                myBlok.postsList[i],
                               ),
-                              '',
+                            SizedBox(
+                              height: 200,
                             ),
-                        ],
-                      );
-                    }
-                    return Text(AppStringsInEnglish.oops);
-                  },
+                          ],
+                        );
+                      }
+                      return Text(AppStringsInEnglish.oops);
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
