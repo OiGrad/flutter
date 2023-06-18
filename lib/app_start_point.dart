@@ -5,7 +5,6 @@ import 'package:kemet/core/themes.dart';
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_cubit.dart';
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_screen.dart';
 import 'package:kemet/modules/create_post/create_post_cubit.dart';
-import 'package:kemet/modules/navigation_bar_modules/posts/posts_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -87,7 +87,7 @@ Widget welcomeWidget(context) {
               CircleAvatar(
                 backgroundColor: AppColors.primary,
                 child: Image.asset(
-                  'assets/images/dommy_photo_home_screen.png',
+                  'assets/images/account_avatar.png',
                 ),
               ),
             ],

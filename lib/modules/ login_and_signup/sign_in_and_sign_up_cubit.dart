@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kemet/core/constants.dart';
 import 'package:kemet/core/navigation.dart';
+import 'package:kemet/core/strings.dart';
 import 'package:kemet/helper/end_points.dart';
 import 'package:kemet/helper/remote/dio_helper.dart';
 import 'package:kemet/models/user_model.dart';
@@ -61,6 +62,7 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
       );
       // print(value.data);
       userModel = UserModel.fromJson(value.data);
+      // AppStringsInEnglish!.userName = userModel!.name.toString();
       getToken(
           context,
           emailSignupController.text.trim(),

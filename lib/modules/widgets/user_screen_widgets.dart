@@ -36,14 +36,14 @@ Widget iconChips() {
   );
 }
 
-Widget userInformation(context, editFunc) {
+Widget userInformation(context, editFunc,name) {
   return Column(
     children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            AppStringsInEnglish.userName,
+          Text(
+            name,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27),
           ),
           SizedBox(
@@ -128,13 +128,13 @@ Widget profilePicture(context) {
     child: CircleAvatar(
       maxRadius: MediaQueryValues(context).height * 5 / 70,
       backgroundColor: AppColors.white,
-      child: Image.asset('assets/images/user_profile.png'),
+      child: Image.asset('assets/images/account_avatar.png'),
       //assets/images/test.png
     ),
   );
 }
 
-Widget bodyOfProfile(context, editFunc) {
+Widget bodyOfProfile(context, editFunc,name) {
   return Align(
     alignment: Alignment.bottomRight,
     child: Container(
@@ -153,7 +153,7 @@ Widget bodyOfProfile(context, editFunc) {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              userInformation(context, editFunc),
+              userInformation(context, editFunc,name),
               BlocProvider(
                 create: (context) => UserScreenCubit()..getPosts(context),
                 child: Padding(

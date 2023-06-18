@@ -43,7 +43,7 @@ class AppStringsInEnglish {
 
   static const String search = 'Search';
 
-  static const String userName = 'Abanob Ashraf';
+  static String userName = 'Abanob Ashraf';
   static const String userLocation = 'Cairo, Egypt';
 
   static const String generalInfo = 'General Info';

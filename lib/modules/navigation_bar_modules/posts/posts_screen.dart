@@ -3,12 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/strings.dart';
 import 'package:kemet/helper/shimmer/post_shimmer.dart';
-import 'package:kemet/models/place_hint.dart';
 import 'package:kemet/modules/navigation_bar_modules/posts/posts_cubit.dart';
 import 'package:kemet/modules/widgets/home_screen_widgets.dart';
 import 'package:kemet/modules/widgets/post_widgets.dart';
 
-import '../../../models/post_model.dart';
 
 class PostsScreen extends StatelessWidget {
   const PostsScreen({Key? key}) : super(key: key);
