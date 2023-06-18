@@ -18,7 +18,7 @@ part 'place_search_page_state.dart';
 class PlaceSearchPageCubit extends Cubit<PlaceSearchPageState> {
   PlaceSearchPageCubit() : super(PlaceSearchPageInitial());
 
-  List<PlaceHint> searchResults = [];
+  List<Place> searchResults = [];
 
   void getSearchResuls(BuildContext context, String query) {
     emit(GetPlacesLoading());
@@ -30,7 +30,7 @@ class PlaceSearchPageCubit extends Cubit<PlaceSearchPageState> {
         searchResults = [];
         print(value.data);
         value.data.forEach((e) {
-          searchResults.add(PlaceHint.fromJson(e));
+          searchResults.add(Place.fromJson(e));
         });
         emit(GetPlacesSuccess());
       },
@@ -64,19 +64,5 @@ class PlaceSearchPageCubit extends Cubit<PlaceSearchPageState> {
         PlaceView(
           place: place!,
         ));
-  }
-
-  addSomePlaces() {
-    searchResults = [
-      PlaceHint(id: "1", name: 'مسجد الحسين', image: 'assets/images/1.jpg'),
-      PlaceHint(
-          id: "2", name: 'مسجد السلطان حسن', image: 'assets/images/2.jpg'),
-      PlaceHint(id: "3", name: 'مسجد الازهر', image: 'assets/images/3.jpg'),
-      PlaceHint(
-          id: "4", name: 'مسجد عمرو بن العاص', image: 'assets/images/4.jpg'),
-      PlaceHint(
-          id: "5", name: 'مسجد احمد ابن طولون', image: 'assets/images/5.jpg'),
-    ];
-    emit(UpdatePlacesSuccess());
   }
 }

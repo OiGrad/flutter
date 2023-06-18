@@ -1,5 +1,5 @@
 class PlaceHint {
-  String id;
+  var id;
   String name;
   String image;
   PlaceHint({

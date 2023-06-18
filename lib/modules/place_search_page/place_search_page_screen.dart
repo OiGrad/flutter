@@ -96,7 +96,7 @@ class _PlaceSearchPageState extends State<PlaceSearchPage> {
                               PlaceHint(
                                   id: myCubit.searchResults[i].id,
                                   name: myCubit.searchResults[i].name,
-                                  image: myCubit.searchResults[i].image));
+                                  image: myCubit.searchResults[i].main_Image));
                           Navigator.pop(context);
                         },
                         child: Text(myCubit.searchResults[i].name),
