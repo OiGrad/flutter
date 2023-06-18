@@ -146,7 +146,7 @@ Widget imageInPostWedgit(int index) {
           borderRadius: BorderRadius.circular(8),
           child: Image.file(
             File(mycubit.contentList[index].image.path),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
             width: MediaQuery.of(context).size.width,
             height: 300,
           ),

@@ -38,41 +38,43 @@ class PlaceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
+      body:  BlocProvider(
         create: (BuildContext context) => PlaceDetailsCubit(),
         child: BlocConsumer<PlaceDetailsCubit, PlaceDetailsState>(
           listener: (context, state) {},
           builder: (context, state) {
             var myBloc = BlocProvider.of<PlaceDetailsCubit>(context);
             return detailedScreenDraft(
-              context,
-              title: place.name,
-              imageLink: place.main_Image,
-              headCardItem: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(3, 3, 3, 3),
-                    child: RatingBar.builder(
-                      ignoreGestures: true,
-                      initialRating: double.parse(place.rate),
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemSize: 15,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 0.5),
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      onRatingUpdate: (double value) {},
+        context,
+        title: place.name,
+        imageLink: place.main_Image,
+        headCardItem: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(3, 3, 3, 3),
+              child: RatingBar.builder(
+                ignoreGestures: true,
+                initialRating: double.parse(place.rate),
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemSize: 15,
+                itemPadding: const EdgeInsets.symmetric(horizontal: 0.5),
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (double value) {},
                     ),
                   ),
                   Text("${place.rate.toString()}/5"),
                 ],
+
               ),
               children: [
+
                 const SizedBox(),
                 headNote(
                   context,
@@ -82,14 +84,15 @@ class PlaceView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(15, 5, 15, 5),
                   child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(FontAwesomeIcons.sterlingSign),
-                      Text(place.price.toString()),
-
-                      /*Icon(Icons.pause_circle),
-                Text(place.name),*/
+                      // Icon(
+                      //   FontAwesomeIcons.dollarSign,
+                      //   size: 25,
+                      // ),
+                      Text(
+                        "EGP ${place.price.toString()}",
+                        style: TextStyle(fontSize: 25),
+                      ),
                     ],
                   ),
                 ),

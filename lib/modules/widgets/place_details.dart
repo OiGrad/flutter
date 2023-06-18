@@ -22,8 +22,8 @@ Widget detailedScreenDraft(
             child: Image.network(
               imageLink,
               width: double.infinity,
-              height: 500,
-              fit: BoxFit.fill,
+              height: 250,
+              fit: BoxFit.cover,
             ),
           ),
           Column(children: [
@@ -99,7 +99,8 @@ Widget detailedScreenDraft(
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(5, 5, 15, 5),
                       child: CircleAvatar(
                         backgroundColor: AppColors.primary,
                         minRadius: 15,
