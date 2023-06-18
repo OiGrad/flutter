@@ -180,7 +180,7 @@ Widget cardOfPlace(context, Place place) {
           Container(
             height: MediaQueryValues(context).height * 2 / 14,
             child: Image.network(
-              '${AppEndPoints.baseUrl}${place.main_Image}',
+              place.main_Image,
               width: (MediaQueryValues(context).width * 5 / 11) - 20,
               height: MediaQueryValues(context).height * 5 / 25,
               fit: BoxFit.fill,
@@ -209,7 +209,7 @@ Widget cardOfPlace(context, Place place) {
                           return InkWell(
                             onTap: () {
                               //TODO: set the condition
-                              if (false) {
+                              if (place.isfav) {
                                 myBloc.unFavPlace(context, place.id);
                                 return;
                               }
