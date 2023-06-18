@@ -5,7 +5,7 @@ class Comment {
   int id;
   String userName;
   String comment;
-  int commentedAt;
+  String commentedAt;
   bool hasReplays;
 
   Comment({
@@ -17,13 +17,14 @@ class Comment {
   });
 
   factory Comment.fromJson(Map<String, dynamic> json) {
+    print(json);
     return Comment(
-      id: int.parse(json['id']),
-      userName: json['user'],
-      comment: json['comment'],
-      commentedAt: json['commentedAt'],
-      hasReplays: json['hasReplays'],
-    );
+        id: json['id'],
+        userName: json['owner']['username'],
+        comment: json['text'],
+        commentedAt: json['created_at'],
+        hasReplays: true //json['hasReplays'],
+        );
   }
 
   Map<String, dynamic> toJson() {

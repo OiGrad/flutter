@@ -15,11 +15,36 @@ class CommentsCubit extends Cubit<CommentsState> {
 
   List<Comment> commentsList = [];
 
+  Map constructData(String text, String parentType, String parentId) {
+    if (parentType == 'post') {
+      return {
+        "text": text,
+        "place_id": "",
+        "post_id": parentId,
+        "comment_id": ""
+      };
+    }
+    if (parentType == 'place') {
+      return {
+        "text": text,
+        "place_id": parentId,
+        "post_id": "",
+        "comment_id": ""
+      };
+    }
+    return {
+      "text": text,
+      "comment_id": parentId,
+      "place_id": "",
+      "post_id": ""
+    };
+  }
+
   void saveComment(context, text, parentType, parentId) {
     emit(PostCommentsLoading());
     DioHelper.postData(
       url: AppEndPoints.postComment,
-      data: {'text': text, 'parent_type': parentType, 'parent_id': parentId},
+      data: constructData(text, parentType, parentId.toString()),
     ).then((value) {
       showSnackBar(
         context: context,
@@ -28,6 +53,7 @@ class CommentsCubit extends Cubit<CommentsState> {
       );
       emit(PostCommentsSuccess());
     }).catchError((e) {
+      print("error: ${e.toString()}");
       showSnackBar(
         context: context,
         text: 'Save Comment Error',
@@ -41,13 +67,16 @@ class CommentsCubit extends Cubit<CommentsState> {
     emit(GetCommentsLoading());
 
     await DioHelper.getData(
-      url: AppEndPoints.getComments(parentId),
+      url: AppEndPoints.getComments,
+      query: {"parent_id": parentId, "parent_type": parentType},
     ).then((value) {
-      value.data['results'].forEach((e) {
+      commentsList = [];
+      value.data.forEach((e) {
         commentsList.add(Comment.fromJson(e));
       });
       emit(GetCommentsSuccess());
     }).catchError((err) {
+      print("error: ${err.toString()}");
       emit(GetCommentsError());
       showSnackBar(
           context: context,

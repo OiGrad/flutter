@@ -16,10 +16,7 @@ class AppEndPoints {
   static const String getCities = '${baseUrl}/places/city/';
 
   static const String getPosts = '${baseUrl}/posts/post/';
-  static String getComments(postId) {
-    return '${baseUrl}/post/$postId/comments/';
-    //TODO: remake it after backend update.
-  }
+  static const String getComments = '${baseUrl}/comments';
 
   static String getPlace(placeId) {
     return '${baseUrl}/places/${placeId}';
@@ -29,7 +26,7 @@ class AppEndPoints {
     return '${baseUrl}/places/Get-Place-By-City-Id/${cityId}';
   }
 
-  static const String postComment = '${baseUrl}/comments/comments/';
+  static const String postComment = '${baseUrl}/comments/';
   static const String searchPlaces = '${baseUrl}/places/search/';
 
   static const String getFavPlaces = '${baseUrl}/fav/GetMyFavPlace';
