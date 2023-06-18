@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/media_query_values.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/modules/widgets/post_widgets.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
+
+import '../../../helper/shimmer/post_shimmer.dart';
+import '../navigation_bar_modules/user/user_screen_cubit.dart';
 
 Widget iconChips() {
   return Padding(
@@ -67,7 +72,7 @@ Widget userInformation(context, editFunc) {
           iconChips(),
         ],
       ),
-      Row(
+      /*Row(
         children: [
           defaultButton(
               text: 'Recent Trips',
@@ -82,7 +87,7 @@ Widget userInformation(context, editFunc) {
               context: context,
               width: 0),
         ],
-      ),
+      ),*/
     ],
   );
 }
@@ -145,10 +150,50 @@ Widget bodyOfProfile(context, editFunc) {
       child: Padding(
         padding: EdgeInsets.symmetric(
             vertical: MediaQueryValues(context).height * 2 / 30),
-        child: Column(
-          children: [
-            userInformation(context, editFunc),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              userInformation(context, editFunc),
+              BlocProvider(
+                create: (context) => UserScreenCubit()..getPosts(context),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 35),
+                  child: Container(
+                    color: AppColors.grey,
+                    child: BlocConsumer<UserScreenCubit, UserScreenState>(
+                      listener: (context, state) {},
+                      builder: (context, state) {
+                        var myBlok = BlocProvider.of<UserScreenCubit>(context);
+                        if (state is GetPostsLoading) {
+                          return Column(
+                            children: const [
+                              PostShimmer(),
+                              PostShimmer(),
+                            ],
+                          );
+                        }
+                        if (state is GetPostsSuccess) {
+                          return Column(
+                            children: [
+                              for (int i = 0; i < myBlok.postsList.length; i++)
+                                post(
+                                  context,
+                                  myBlok.postsList[i],
+                                ),
+                              SizedBox(
+                                height: 50,
+                              ),
+                            ],
+                          );
+                        }
+                        return Text(AppStringsInEnglish.oops);
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     ),

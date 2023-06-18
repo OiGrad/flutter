@@ -82,6 +82,83 @@ Widget defaultTextFormField({
   );
 }
 
+Widget commentTextFormField({
+  initValue,
+  required validator,
+  required textInputType,
+  required isPassword,
+  Function? function,
+  required controller,
+  required label,
+  labelColor,
+  required bool arabic,
+  hintText,
+  icon,
+  iconColor,
+  maxLines = 1,
+  Widget? iconWidget,
+}) {
+  return Container(
+    decoration: BoxDecoration(
+      color: AppColors.white,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 3,
+          blurRadius: 7,
+          offset: const Offset(0, 3), // changes position of shadow
+        ),
+      ],
+      borderRadius: BorderRadius.circular(
+        5.0,
+      ),
+      border: Border.all(color: AppColors.black, width: 0.1),
+    ),
+    child: Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(5, 1, 5, 1),
+      child: Row(
+        children: [
+          Flexible(
+            child: TextFormField(
+              obscureText: isPassword,
+              keyboardType: textInputType,
+              initialValue: initValue,
+              validator: validator,
+              maxLines: maxLines,
+              minLines: 1,
+              onFieldSubmitted: (value) {
+                function == null ? null : function(value);
+              },
+              controller: controller,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                label: Row(
+                  children: [
+                    if (icon != null)
+                      Icon(
+                        icon,
+                        color: iconColor,
+                      ),
+                    Text(
+                      label,
+                      style: TextStyle(
+                          color: labelColor == null
+                              ? AppColors.black
+                              : labelColor),
+                    ),
+                  ],
+                ),
+                hintText: hintText,
+              ),
+            ),
+          ),
+          iconWidget ?? const SizedBox(),
+        ],
+      ),
+    ),
+  );
+}
+
 Widget defaultButton({
   Widget? img,
   double? width,
@@ -142,7 +219,7 @@ Widget PlaceInContext(context, PlaceHint placeHint) {
   return Row(
     children: [
       Image.network(
-        '${AppEndPoints.baseUrl}${placeHint.image}',
+        placeHint.image,
         width: MediaQueryValues(context).width / 6,
         height: MediaQueryValues(context).width / 6,
         fit: BoxFit.cover,

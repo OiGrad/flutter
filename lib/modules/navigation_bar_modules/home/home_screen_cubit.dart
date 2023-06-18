@@ -43,7 +43,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   }
 
   void getPlaces({required BuildContext context}) async {
-    emit(GetPlacesLoading());
+    emit(GetPlacesHomeLoading());
 
     await DioHelper.getData(
       url: AppEndPoints.getPlaces,

@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/strings.dart';
+import 'package:kemet/modules/comments/comments_component.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../models/comment_model.dart';
 
 class CommentWidget extends StatefulWidget {
   Comment comment;
-  CommentWidget(this.comment, {super.key});
+  double width;
+  CommentWidget({required this.comment, required this.width, super.key});
 
   @override
-  State<CommentWidget> createState() => _CommentWidgetState(comment);
+  State<CommentWidget> createState() => _CommentWidgetState(comment, width);
 }
 
 class _CommentWidgetState extends State<CommentWidget> {
   final Comment comment;
-  _CommentWidgetState(this.comment);
+  double width;
+  _CommentWidgetState(this.comment, this.width);
   bool showReplays = false;
 
   @override
@@ -25,42 +28,62 @@ class _CommentWidgetState extends State<CommentWidget> {
         commentHeader(comment.userName, comment.commentedAt),
         Padding(
           padding: EdgeInsets.only(left: 5),
-          child: Row(
-            children: [
-              Divider(
-                thickness: 2,
-                color: AppColors.primary,
-              ),
-              Column(
+          child: Container(
+            width: width,
+            child: SingleChildScrollView(
+              child: Row(
                 children: [
-                  Text(comment.comment),
-                  Row(
+                  Padding(
+                    padding: EdgeInsets.only(left: 5, right: 5),
+                    child: VerticalDivider(
+                      thickness: 1.5,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                  Column(
                     children: [
-                      comment.hasReplays
-                          ? InkWell(
-                              onTap: () {
-                                setState(() {
-                                  showReplays = !showReplays;
-                                });
-                              },
-                              child: Text(
-                                showReplays
-                                    ? AppStringsInEnglish.hideReplaye
-                                    : AppStringsInEnglish.showReplaye,
-                                style: TextStyle(color: AppColors.primary),
-                              ),
+                      Text(comment.comment),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          comment.hasReplays
+                              ? InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      showReplays = !showReplays;
+                                    });
+                                  },
+                                  child: Text(
+                                    showReplays
+                                        ? AppStringsInEnglish.hideReplaye
+                                        : AppStringsInEnglish.showReplaye,
+                                    style: TextStyle(color: AppColors.primary),
+                                  ),
+                                )
+                              : const SizedBox(),
+                        ],
+                      ),
+                      showReplays
+                          ?
+                          //TODO:show the replays,
+                          CommentSection(
+                              parentId: comment.id,
+                              parentType: "comment",
+                              width: width - 20,
                             )
-                          : const SizedBox(),
+                          : const SizedBox()
                     ],
                   ),
-                  showReplays
-                      ?
-                      //TODO:show the replays,
-                      const SizedBox()
-                      : const SizedBox()
                 ],
-              )
-            ],
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 20, right: 20),
+          child: Divider(
+            thickness: 0.3,
+            color: Colors.grey,
           ),
         ),
       ],

@@ -13,6 +13,7 @@ class Place {
   var rate;
   var info;
   var location_text;
+  bool isfav;
 
   // Location location;
 
@@ -27,6 +28,7 @@ class Place {
     required this.rate,
     required this.info,
     required this.location_text,
+    this.isfav = false,
   });
 
   factory Place.fromJson(Map<String, dynamic> json) {
@@ -34,13 +36,14 @@ class Place {
       id: json["id"],
       city: City.fromJson(json["city"]),
       category: PlaceCategory.fromJson(json["category"]),
-      gallery: List.of(json["gallery"]).map((i) => json["gallery"]).toList(),
+      gallery: List.of(json["gallery"]).map((i) => i["image"]).toList(),
       main_Image: json["main_Image"],
       name: json["name"],
-      price:json["price"],
+      price: json["price"],
       rate: json["rate"],
       info: json["info"],
       location_text: json["location_text"],
+      isfav: json['is_user_fav_place'],
     );
   }
 //

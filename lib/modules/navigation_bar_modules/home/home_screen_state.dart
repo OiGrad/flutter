@@ -9,7 +9,7 @@ class GetCategoryLoading extends HomeScreenState {}
 class GetCategorySuccess extends HomeScreenState {}
 class GetCategoryError extends HomeScreenState {}
 
-class GetPlacesLoading extends HomeScreenState {}
+class GetPlacesHomeLoading extends HomeScreenState {}
 class GetPlacesSuccess extends HomeScreenState {}
 class GetPlacesError extends HomeScreenState {}
 

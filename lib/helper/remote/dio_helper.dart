@@ -35,8 +35,29 @@ class DioHelper {
         queryParameters: query, onReceiveProgress: onreceivProgres);
   }
 
-  static Future<Response> postData(
+  static Future<Response> postData({
+    required url,
+    query,
+    required data,
+    lang = 'en',
+    token,
+  }) async {
+    if (token != null) {
+      dio.options.headers["Authorization"] = 'Bearer $token';
+
+      // dio.options.headers["Content-Type"] = 'application/json';
+    }
+    return await dio.post(url, queryParameters: query, data: data);
+  }
+
+  static Future<Response> postimage(
       {required url, query, required data, lang = 'en', token}) async {
+    if (token != null) {
+      dio.options.headers["Authorization"] = 'Bearer $token';
+      dio.options.headers["Content-Type"] = "multipart/form-data";
+
+      // dio.options.headers["Content-Type"] = 'application/json';
+    }
     return await dio.post(url, queryParameters: query, data: data);
   }
 

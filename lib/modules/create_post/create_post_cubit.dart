@@ -84,28 +84,24 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     emit(ContentReset());
   }
 
-  serializePost() async {
+  serializePost() {
     var serializedContent = [];
     for (var i = 0; i < contentList.length; i++) {
-      var serialized = await contentList[i].toJson(i + 1);
+      var serialized = contentList[i].toJson();
       if (serialized != null) {
         serializedContent.add(serialized);
-        print('------------${await serialized}---------');
       }
     }
-    /*print(serializedContent);
-    if (hasimage) {
-      return FormData.fromMap({'content': [], 'image': img});
-    }*/
-    return {'content': serializedContent};
+
+    return {'contents': serializedContent};
   }
 
   void postPost(context) async {
     emit(PostPublishLoading());
 
-    await DioHelper.postData(
+    await DioHelper.postimage(
       url: AppEndPoints.getPosts,
-      data: await serializePost(),
+      data: FormData.fromMap(serializePost()),
     ).then(
       (value) {
         showSnackBar(
@@ -114,10 +110,11 @@ class CreatePostCubit extends Cubit<CreatePostState> {
             clr: AppColors.green);
         emit(PostPublishSuccess());
       },
-    ).catchError((e) {
+    ).catchError((err) {
+      print(err.toString());
       showSnackBar(
           context: context,
-          text: e.toString(), //AppStringsInEnglish.errorPublishingPost,
+          text: AppStringsInEnglish.errorPublishingPost,
           clr: AppColors.error);
       emit(PostPublishError());
     });

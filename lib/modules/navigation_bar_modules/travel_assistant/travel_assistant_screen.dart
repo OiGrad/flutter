@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kemet/core/colors.dart';
@@ -17,18 +18,7 @@ class TravelAssistantView extends StatefulWidget {
 }
 
 class _TravelAssistantViewState extends State<TravelAssistantView> {
-  List<ChatMessageModel> messages = [
-    ChatMessageModel(messageContent: "Hello, Will", messageType: "receiver"),
-    ChatMessageModel(
-        messageContent: "How have you been?", messageType: "receiver"),
-    ChatMessageModel(
-        messageContent: "Hey Kriss, I am doing fine dude. wbu?",
-        messageType: "sender"),
-    ChatMessageModel(
-        messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-    ChatMessageModel(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +58,13 @@ class _TravelAssistantViewState extends State<TravelAssistantView> {
                         border: Border.all(color: AppColors.grey, width: 2)),
                     padding:
                         const EdgeInsets.only(left: 10, bottom: 10, top: 10),
-                    height: 60,
+                    height: 75,
                     width: double.infinity,
                     child: Row(
                       children: <Widget>[
                         Expanded(
                           child: TextField(
+                            maxLines: 3,
                             controller: myCubit.chatController,
                             decoration: const InputDecoration(
                                 hintText: "Type Something",
@@ -84,18 +75,24 @@ class _TravelAssistantViewState extends State<TravelAssistantView> {
                         const SizedBox(
                           width: 15,
                         ),
-                        FloatingActionButton(
-                          onPressed: () {
-                            // myCubit.completeWithSSE();
-                            myCubit.addMessageInChat(
-                                myCubit.chatController.text.trim(), 'receiver');
-                          },
-                          backgroundColor: Colors.black,
-                          elevation: 0,
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                            size: 35,
+                        ConditionalBuilder(
+                          condition: state is !GetMessageFromAILoading,
+                          fallback: (context)=> const Center(
+                            child:SizedBox(),
+                          ),
+                          builder:(context)=> FloatingActionButton(
+                            onPressed: () {
+                              // myCubit.completeWithSSE();
+                              myCubit.addMessageInChat(
+                                  myCubit.chatController.text.trim(), 'receiver');
+                            },
+                            backgroundColor: Colors.black,
+                            elevation: 0,
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 35,
+                            ),
                           ),
                         ),
                       ],

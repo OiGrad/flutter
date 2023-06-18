@@ -8,6 +8,7 @@ import 'package:kemet/models/city.dart';
 import 'package:kemet/models/place_category.dart';
 import 'package:kemet/models/place_model.dart';
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_cubit.dart';
+import 'package:kemet/modules/place_details/place_details_cubit.dart';
 
 import '../../core/navigation.dart';
 import '../city_details/city_details_screen.dart';
@@ -179,7 +180,7 @@ Widget cardOfPlace(context, Place place) {
           Expanded(
             // height: MediaQueryValues(context).height * 2 / 14,
             child: Image.network(
-              '${AppEndPoints.baseUrl}${place.main_Image}',
+              place.main_Image,
               // width: (MediaQueryValues(context).width * 5 / 11) - 20,
               // height: MediaQueryValues(context).height * 5 / 25,
               fit: BoxFit.cover,
@@ -198,11 +199,31 @@ Widget cardOfPlace(context, Place place) {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: AppColors.primary,
-                      minRadius: 10,
-                      child: Icon(Icons.favorite,
-                          size: 15, color: AppColors.white),
+                    BlocProvider(
+                      create: (BuildContext context) => PlaceDetailsCubit(),
+                      child: BlocConsumer<PlaceDetailsCubit, PlaceDetailsState>(
+                        listener: (context, state) {},
+                        builder: (context, state) {
+                          var myBloc =
+                              BlocProvider.of<PlaceDetailsCubit>(context);
+                          return InkWell(
+                            onTap: () {
+                              //TODO: set the condition
+                              if (place.isfav) {
+                                myBloc.unFavPlace(context, place.id);
+                                return;
+                              }
+                              myBloc.favPlace(context, place.id);
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: AppColors.primary,
+                              minRadius: 10,
+                              child: Icon(Icons.favorite,
+                                  size: 15, color: AppColors.white),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     Text(
                       place.city.name,

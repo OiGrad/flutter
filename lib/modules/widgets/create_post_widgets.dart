@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +7,6 @@ import 'package:kemet/models/in_post_class.dart';
 import 'package:kemet/modules/create_post/create_post_cubit.dart';
 import 'package:kemet/modules/place_search_page/place_search_page_screen.dart';
 import 'package:kemet/modules/widgets/widgets.dart';
-
 import '../../core/colors.dart';
 import '../../core/media_query_values.dart';
 import '../../core/strings.dart';
@@ -87,37 +85,34 @@ SelectPlaceCard(context, int index) {
             borderRadius: const BorderRadius.all(Radius.circular(12)),
             child: Container(
               width: MediaQueryValues(context).width - 40,
-              height: 150,
+              //height: 150,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   mycubit.contentList[index].placeHint == null
-                      ? Expanded(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-                            child: InkWell(
-                              onTap: () {
-                                navigateTo(
-                                    context, PlaceSearchPage(index: index));
-                              },
-                              child: TextFormField(
-                                enabled: false,
-                                decoration: InputDecoration(
-                                  labelText: AppStringsInEnglish.search,
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: AppColors.primary, // Colors.black,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(25),
+                      ? Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                          child: InkWell(
+                            onTap: () {
+                              navigateTo(
+                                  context, PlaceSearchPage(index: index));
+                            },
+                            child: TextFormField(
+                              enabled: false,
+                              decoration: InputDecoration(
+                                labelText: AppStringsInEnglish.search,
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: AppColors.primary, //Colors.black,
+                                    width: 1,
                                   ),
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          15, 15, 15, 15),
-                                  suffixIcon: Padding(
-                                    padding: EdgeInsets.all(15),
-                                    child: Icon(Icons.search_rounded),
-                                  ),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    15, 15, 15, 15),
+                                suffixIcon: Padding(
+                                  padding: EdgeInsets.all(15),
+                                  child: Icon(Icons.search_rounded),
                                 ),
                               ),
                             ),

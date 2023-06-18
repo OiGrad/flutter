@@ -84,8 +84,8 @@ Widget postImage(context, image) {
     padding: const EdgeInsets.symmetric(horizontal: 20),
     child: ClipRRect(
       borderRadius: BorderRadius.circular(8),
-      child: Image.file(
-        File(image.path),
+      child: Image.network(
+        "${AppEndPoints.baseUrl}${image}",
         fit: BoxFit.fill,
         width: MediaQuery.of(context).size.width,
         height: 300,
@@ -107,10 +107,10 @@ Widget postPlaceCard(BuildContext context, PlaceHint place, comment) {
           width: MediaQueryValues(context).width - 40,
           child: Column(
             children: [
-              PlaceInContext(context, place),
+              PlaceInContext(context, place), //k
               Padding(
                 padding: const EdgeInsets.all(5),
-                child: Text(comment),
+                child: Text(comment ?? ""),
               ),
             ],
           ),
@@ -120,7 +120,7 @@ Widget postPlaceCard(BuildContext context, PlaceHint place, comment) {
   );
 }
 
-Widget post(BuildContext context, Post post, PlaceHint place, String comment) {
+Widget post(BuildContext context, Post post) {
   return Padding(
     padding: EdgeInsets.only(top: 10),
     child: Container(
@@ -128,6 +128,7 @@ Widget post(BuildContext context, Post post, PlaceHint place, String comment) {
       color: AppColors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           postHeader(post.userName, post.postedAt),
           ...postBody(context, post.content),
@@ -152,14 +153,17 @@ List<Widget> postBody(context, List body) {
   List<Widget> bodyWidgets = [];
   for (int i = 0; i < body.length; i++) {
     if (body[i].type == 'text') {
-      bodyWidgets.add(Padding(
-        padding: EdgeInsets.all(15),
-        child: Row(
-          children: [
-            Text(body[i].controller.text),
-          ],
+      bodyWidgets.add(
+        Padding(
+          padding: EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(body[i].text),
+            ],
+          ),
         ),
-      ));
+      );
     } else if (body[i].type == 'place') {
       //var place = getPlace(context, body[i]['id']);
       //print("Place:.....${place}....");
@@ -169,7 +173,7 @@ List<Widget> postBody(context, List body) {
             id: body[i].placeHint.id,
             name: body[i].placeHint.name,
             image: body[i].placeHint.image),
-        body[i].commentController.text,
+        body[i].comment,
       ));
     } else if (body[i].type == 'image') {
       bodyWidgets.add(postImage(context, body[i].image));
@@ -281,7 +285,7 @@ class _PostFooterState extends State<PostFooter> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10, bottom: 5),
           child: Row(
             children: [
               InkWell(
@@ -301,7 +305,11 @@ class _PostFooterState extends State<PostFooter> {
           ),
         ),
         showComments
-            ? CommentSection(parentId: postId, parentType: 'post')
+            ? CommentSection(
+                parentId: postId,
+                parentType: 'post',
+                width: MediaQueryValues(context).width,
+              )
             : const SizedBox(),
       ],
     );

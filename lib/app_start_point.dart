@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => SignInAndSignUpCubit()),
-        BlocProvider(create: (context) => PostsCubit()),
         BlocProvider(
             create: (context) => CreatePostCubit()
               ..addText(context, hint: AppStringsInEnglish.addPostLable)),

@@ -1,10 +1,14 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 
-//import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
+import 'package:kemet/core/constants.dart';
+import 'package:kemet/helper/end_points.dart';
+import 'package:kemet/helper/remote/dio_helper.dart';
 import 'package:kemet/models/chat_model.dart';
+import 'package:kemet/models/message_from_ai.dart';
 
 part './travel_assistant_state.dart';
 
@@ -13,6 +17,7 @@ class TravelAssistantCubit extends Cubit<TravelAssistantState> {
 
   //var openAI;
 
+  // MessageAi? messageFromAI;
   StreamSubscription? subscription;
 
   TextEditingController chatController = TextEditingController();
@@ -21,17 +26,14 @@ class TravelAssistantCubit extends Cubit<TravelAssistantState> {
   List<ChatMessageModel> messages = [
     // TODO : make the name dynamic
     ChatMessageModel(
-        messageContent: 'Hi Abanob Ashraf', messageType: 'receiver'),
+        messageContent: 'Hi Abanob Ashraf', messageType: 'sender'),
     ChatMessageModel(
         messageContent: 'I’m TATA your Travel Assistant Bot',
-        messageType: 'receiver'),
+        messageType: 'sender'),
     ChatMessageModel(
         messageContent: 'I will recommend the Right Trip for you?',
-        messageType: 'receiver'),
-    ChatMessageModel(
-      messageContent: 'last',
-      messageType: 'receiver',
-    ),
+        messageType: 'sender'),
+
   ];
 
   void addMessageInChat(messageContent, messageType) {
@@ -40,95 +42,53 @@ class TravelAssistantCubit extends Cubit<TravelAssistantState> {
       if (messageType == 'receiver') {
         messages.add(ChatMessageModel(
             messageContent: messageContent, messageType: messageType));
+        var msg = chatController.text.trim();
         chatController.clear();
         controller.animateTo(
           controller.position.maxScrollExtent,
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeOut,
         );
-
+        messages.add(ChatMessageModel(messageContent: '...', messageType: 'sender'));
         emit(AddMessageToListSuccess());
-      } else {
-        // TODO : i'll get message and add it to messages list []
+        getAIMessage(question: msg);
       }
     }
   }
 
-/*Future<Map<String, dynamic>> sendChatRequest(String message) async {
-    final apiKey = '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';
-    final apiUrl = 'https://api.openai.com/v1/completions';
+  MessageAi? messageAi;
+  void getAIMessage({required question}) async {
+    emit(GetMessageFromAILoading());
+    Dio? dio = Dio();
 
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $apiKey',
+    // dio!.options.headers["Authorization"] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNGFjMzM4ZjUtZjliOS00N2I4LWE5ZDctMGU2OTZkNWYzODIxIiwidHlwZSI6ImFwaV90b2tlbiJ9.nFhECRCTZAW-RXhS2diiCLIpyTfIayEXjtiRkU3sxKs}';
+    // dio.options.headers["Content-Type"] = 'application/json';
+    await dio.post(
+      'https://api.edenai.run/v2/text/chat',
+      data: {
+        'providers': 'openai',
+        'text': question.toString(),
       },
-      body: jsonEncode({
-        /*'messages': [
-          {'role': 'user', 'content': message},
-        ],*/
-        "model": "text-davinci-003",
-        "prompt": "Say this is a test"
-      }),
-    );
+      options:Options(
+        contentType: 'application/json',
+        receiveDataWhenStatusError: true,
+        headers: {
+          'Authorization':'Bearer ${AppConstants.aiToken}'
+        }
+      ),
+    ).then((value) {
+      // print('Success');
+      // print();
+      messages.removeLast();
+      messages.add(ChatMessageModel(messageContent: value.data['openai']['generated_text'], messageType: 'sender'));
+      emit(GetMessageFromAISuccess());
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return data;
-    } else {
-      print(response.statusCode);
-      throw Exception('Failed to send chat request');
-    }
-  }*/
 
-/*void sendMessage(String message) async {
-    try {
-      final response = await sendChatRequest(message);
-      // Process the response as needed
-      print(response);
-    } catch (e) {
-      print('Error: $e');
-    }
-  }*/
+    }).catchError((err) {
+      // print('Error');
+      print(err.toString());
 
-// void sendMessage() async {
-//   emit(SendMessageLoading());
-//   messages.add(
-//     ChatMessageModel(
-//       messageContent: chatController.text.trim(),
-//       messageType: 'sender',
-//     ),
-//   );
-//   emit(AddMyMessageToMessages());
-//
-//   // final request = CompleteRe
-// }
-//
-// init() {
-//   openAI = OpenAI.instance.build(
-//     token: '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',
-//     baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 15)),
-//     enableLog: true,
-//   );
-//   print('finish init');
-// }
-//
-// end() {
-//   subscription!.cancel();
-// }
-//
-// void completeWithSSE() {
-//   final request = CompleteText(
-//       prompt: "Hello?", maxTokens: 200, model: Model.textDavinci3);
-//   openAI.onCompletionSSE(request: request).listen((it) {
-//     debugPrint(it.choices.last.text);
-//   });
-// }
+      emit(GetMessageFromAIError());
+    });
+  }
 }
-/*
-                    messageReceiver('Hi Abanob Ashraf'),
-                    messageReceiver('I’m TATA your Travel Assistant Bot'),
-                    messageReceiver('I will recommend the Right Trip for you?'),
-                    messageReceiver('last'),
- */

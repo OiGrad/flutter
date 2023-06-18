@@ -14,8 +14,12 @@ import '../widgets/widgets.dart';
 class CommentSection extends StatelessWidget {
   final String parentType;
   final int parentId;
+  final double width;
   const CommentSection(
-      {required this.parentId, required this.parentType, super.key});
+      {required this.parentId,
+      required this.parentType,
+      required this.width,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +35,11 @@ class CommentSection extends StatelessWidget {
       create: (context) =>
           CommentsCubit()..getComments(context, parentId, parentType),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
             padding: const EdgeInsets.all(5),
-            child: defaultTextFormField(
+            child: commentTextFormField(
               validator: validator,
               textInputType: TextInputType.multiline,
               isPassword: false,
@@ -43,7 +48,15 @@ class CommentSection extends StatelessWidget {
               arabic: true,
               maxLines: 3,
               iconWidget: BlocConsumer<CommentsCubit, CommentsState>(
-                listener: (context, state) {},
+                listener: (context, state) {
+                  if (state is PostCommentsSuccess) {
+                    BlocProvider.of<CommentsCubit>(context).getComments(
+                      context,
+                      parentId,
+                      parentType,
+                    );
+                  }
+                },
                 builder: (context, state) {
                   var myBloc = BlocProvider.of<CommentsCubit>(context);
                   return IconButton(
@@ -77,12 +90,15 @@ class CommentSection extends StatelessWidget {
                   ],
                 );
               } else if (state is GetCommentsSuccess) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: myBloc.commentsList.length,
-                  itemBuilder: (context, index) {
-                    return CommentWidget(myBloc.commentsList[index]);
-                  },
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (int i = 0; i < myBloc.commentsList.length; i++)
+                      CommentWidget(
+                        comment: myBloc.commentsList[i],
+                        width: width,
+                      ),
+                  ],
                 );
               } else {
                 return const SizedBox();
