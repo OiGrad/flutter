@@ -4,6 +4,7 @@ import 'package:kemet/core/colors.dart';
 //TODO: refactor the  light mode
 ThemeData appLightTheme(){
   return ThemeData(
+
     appBarTheme:const AppBarTheme(
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -14,6 +15,7 @@ ThemeData appLightTheme(){
             fontWeight: FontWeight.bold
         )
     ),
+
     primaryColor: AppColors.primary,
     hintColor: AppColors.hint,
     brightness: Brightness.light,

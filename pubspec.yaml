@@ -18,7 +18,18 @@ dependencies:
   flutter_bloc:
   bloc:
   conditional_builder_null_safety:
+  flutter_native_splash: ^2.2.15
   cupertino_icons: ^1.0.2
+  flutter_snake_navigationbar: ^0.6.1
+  flutter_rating_bar: ^4.0.1
+  auto_size_text: ^3.0.0
+  shimmer: ^2.0.0
+  dotted_border: ^2.0.0+3
+  timeago: ^3.4.0
+  font_awesome_flutter: ^10.4.0
+
+  
+
 
 dev_dependencies:
   flutter_test:
@@ -33,10 +44,18 @@ flutter:
 
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Tajawal
+      fonts:
+        - asset: assets/fonts/TajawalBold.ttf
+          weight: 700
+        - asset: assets/fonts/TajawalRegular.ttf
+          weight: 400
+        - asset: assets/fonts/TajawalMedium.ttf
+          weight: 500
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -63,3 +82,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash:
+  image: assets/images/kemet_splash.png
+  background_image: assets/images/splash_screen_background_image.png
