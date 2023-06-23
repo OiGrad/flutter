@@ -6,6 +6,8 @@ import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_cubit.dart
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_screen.dart';
 import 'package:kemet/modules/create_post/create_post_cubit.dart';
 
+import 'helper/check_internet_connection/cubit/internet_connection_check_cubit.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -13,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => InternetConnectionCheckCubit()),
         BlocProvider(create: (context) => SignInAndSignUpCubit()),
         BlocProvider(
             create: (context) => CreatePostCubit()
