@@ -21,3 +21,5 @@ class LoginError extends SignInAndSignUpState {}
 class GetTokenLoading extends SignInAndSignUpState {}
 class GetTokenSuccess extends SignInAndSignUpState {}
 class GetTokenError extends SignInAndSignUpState {}
+class InternetConnectionSuccess extends SignInAndSignUpState {}
+class InternetConnectionError extends SignInAndSignUpState {}

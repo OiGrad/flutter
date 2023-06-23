@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kemet/core/constants.dart';
@@ -63,12 +66,8 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
       // print(value.data);
       userModel = UserModel.fromJson(value.data);
       // AppStringsInEnglish!.userName = userModel!.name.toString();
-      getToken(
-          context,
-          emailSignupController.text.trim(),
-          passwordSignupController.text.trim(),
-          true
-      );
+      getToken(context, emailSignupController.text.trim(),
+          passwordSignupController.text.trim(), true);
       // print(userModel!.name);
       // print(userModel!.username);
       // print(userModel!.email);
@@ -99,8 +98,6 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
       // print(value.data);
       userModel = UserModel.fromJson(value.data);
 
-
-
       navigateToAndReplacement(context, const HomeScreenAndNavigationBar());
       // print(userModel!.name);
       // print(userModel!.username);
@@ -116,7 +113,7 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
     });
   }
 
-  getToken(context, email, password,bool isSignUp) async {
+  getToken(context, email, password, bool isSignUp) async {
     emit(GetTokenLoading());
     await DioHelper.postData(
       url: AppEndPoints.token,
@@ -134,7 +131,7 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
       AppConstants.token = token;
       print(refresh);
       print(token);
-      if(isSignUp == true){
+      if (isSignUp == true) {
         navigateToAndReplacement(context, const HomeScreenAndNavigationBar());
       }
       emit(GetTokenSuccess());
@@ -151,5 +148,25 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
 
   testGoToNavigationBar(context) {
     navigateTo(context, const HomeScreenAndNavigationBar());
+  }
+
+  StreamSubscription? streamSubscription;
+
+  checkInternetConnection() async {
+    streamSubscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      if (result == ConnectivityResult.none) {
+        emit(InternetConnectionError());
+      } else {
+        emit(InternetConnectionSuccess());
+      }
+    });
+  }
+
+  @override
+  Future<void> close() {
+    streamSubscription!.cancel();
+    return super.close();
   }
 }

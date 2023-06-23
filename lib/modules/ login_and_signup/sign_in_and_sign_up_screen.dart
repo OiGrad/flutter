@@ -4,6 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:kemet/core/colors.dart';
 import 'package:kemet/core/strings.dart';
 import 'package:kemet/core/constants.dart';
+import 'package:kemet/helper/check_internet_connection/check_internet.dart';
 import 'package:kemet/modules/%20login_and_signup/sign_in_and_sign_up_cubit.dart';
 import 'package:kemet/modules/widgets/sign_page_widgets.dart';
 
@@ -31,7 +32,9 @@ class _SignPageState extends State<SignPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignInAndSignUpCubit, SignInAndSignUpState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        checkInternet(state, context);
+      },
       builder: (context, state) {
         var myBloc = BlocProvider.of<SignInAndSignUpCubit>(context);
         return Scaffold(
