@@ -150,8 +150,21 @@ class SignInAndSignUpCubit extends Cubit<SignInAndSignUpState> {
     navigateTo(context, const HomeScreenAndNavigationBar());
   }
 
-  StreamSubscription? streamSubscription;
 
+  var firstConnectionResult;
+  checkInternetConnectionFirstTime()async{
+    print('start');
+    firstConnectionResult =await Connectivity().checkConnectivity();
+    if (firstConnectionResult == ConnectivityResult.none) {
+      print('error');
+        emit(InternetConnectionError());
+      } else {
+        print('success');
+        emit(InternetConnectionSuccess());
+      }
+  }
+
+  StreamSubscription? streamSubscription;
   checkInternetConnection() async {
     streamSubscription = Connectivity()
         .onConnectivityChanged
